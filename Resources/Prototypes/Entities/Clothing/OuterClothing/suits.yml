@@ -271,6 +271,8 @@
       coefficients:
         Heat: 0.85
         Radiation: 0.01
+  - type: ClothingRadiationProtection
+    protectionCoefficient: 0.1
   - type: Clothing
     sprite: Clothing/OuterClothing/Suits/rad.rsi
   - type: GroupExamine

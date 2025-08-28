@@ -1,0 +1,26 @@
+- type: radiationEffect
+  id: SkinBurn
+  whiteList:
+    components:
+    - MobThresholds
+  canRepeat: true
+  events:
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: LargeCaution
+      messages: "ПИЗДА КОЖА КОРИТ НАХУЙ"
+    - !type:HealthChange
+      damage:
+        groups:
+          Burn: 10
+
+- type: radiationEffect
+  id: Vomit
+  whiteList:
+    components:
+    - MobThresholds
+  events:
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:ChemVomit
