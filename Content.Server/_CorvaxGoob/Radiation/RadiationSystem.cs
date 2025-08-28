@@ -23,6 +23,18 @@ public sealed class RadiationSystem : EntitySystem
         SubscribeLocalEvent<LivingRadiationReceiverComponent, OnIrradiatedEvent>(OnIrradiated);
     }
 
+    public void ApplyRadiationEffect(EntityUid uid, RadiationEffectPrototype effect)
+    {
+        if (effect.Events is null)
+            return;
+
+        foreach (var targetEvent in effect.Events)
+        {
+            targetEvent.Target = uid;
+            RaiseLocalEvent(uid, (object) targetEvent, true);
+        }
+    }
+
     public void OnIrradiated(Entity<LivingRadiationReceiverComponent> entity, ref OnIrradiatedEvent ev)
     {
         if (entity.Comp.MinimumRatiadionThreshold > ev.RadsPerSecond)
@@ -71,11 +83,7 @@ public sealed class RadiationSystem : EntitySystem
                 continue;
             }
 
-            foreach (var targetEvent in effect.Events)
-            {
-                targetEvent.Target = entity;
-                RaiseLocalEvent(entity, (object) targetEvent, true);
-            }
+            ApplyRadiationEffect(entity, effect);
 
             if (!effect.CanRepeat)
                 entity.Comp.AppliedEffects.Add(effect);
