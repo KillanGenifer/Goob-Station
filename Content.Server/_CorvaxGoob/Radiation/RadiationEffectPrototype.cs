@@ -1,7 +1,4 @@
-using Content.Server._CorvaxGoob.Events;
-using Content.Server.EntityEffects.Effects;
 using Content.Shared._CorvaxGoob.Events;
-using Content.Shared.Popups;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 
@@ -20,5 +17,11 @@ public sealed class RadiationEffectPrototype : IPrototype
     public EntityWhitelist? WhiteList = default!;
 
     [DataField]
+    public EntityWhitelist? BlackList = default!;
+
+    [DataField]
     public List<BaseTargetEvent>? Events;
+
+    [DataField]
+    public int Weight = 1;
 }

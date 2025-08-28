@@ -4,6 +4,7 @@
     components:
     - MobThresholds
   canRepeat: true
+  weight: 1
   events:
   - !type:ApplyEntityEffectTargetEvent
     effects:
@@ -18,6 +19,7 @@
 - type: radiationEffect
   id: Vomit
   canRepeat: true
+  weight: 1
   whiteList:
     components:
     - MobThresholds

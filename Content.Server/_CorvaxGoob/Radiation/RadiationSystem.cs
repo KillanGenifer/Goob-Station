@@ -5,6 +5,7 @@ using Content.Shared.Radiation.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
+using System.Diagnostics.Metrics;
 using System.Linq;
 
 namespace Content.Server._CorvaxGoob.Radiation;
@@ -64,22 +65,21 @@ public sealed class RadiationSystem : EntitySystem
 
         entity.Comp.CurrentRadiationLevel = 0;
 
-        var protoList = _proto.EnumeratePrototypes<RadiationEffectPrototype>().ToList();
+        var protoList = WhiteListPrototypes(_proto.EnumeratePrototypes<RadiationEffectPrototype>().ToList(), entity);
+        var totalWeight = CalculateTotalWeight(protoList);
 
         for (var i = 0; i < protoList.Count + 1; i++)
         {
-            var effect = _random.Pick(protoList);
+            var effect = PickByWeight(protoList, totalWeight);
 
-            if (entity.Comp.AppliedEffects.Contains(effect) && !effect.CanRepeat)
-            {
-                protoList.Remove(effect);
+            if (effect is null)
                 continue;
 
-            }
-
-            if (effect.WhiteList is not null && _whiteList.IsBlacklistFail(effect.WhiteList, entity) || effect.Events is null)
+            if (entity.Comp.AppliedEffects.Contains(effect) && !effect.CanRepeat || effect.WhiteList is not null
+                && _whiteList.IsBlacklistFail(effect.WhiteList, entity) || effect.Events is null)
             {
                 protoList.Remove(effect);
+                totalWeight -= effect.Weight;
                 continue;
             }
 
@@ -90,5 +90,52 @@ public sealed class RadiationSystem : EntitySystem
 
             return;
         }
+    }
+
+    private RadiationEffectPrototype? PickByWeight(List<RadiationEffectPrototype> list, int totalWeight)
+    {
+        if (list.Count == 0)
+            return null;
+
+        if (list.Count == 1)
+            return list[0];
+
+        double randomValue = _random.NextDouble() * totalWeight;
+        double cumulativeWeight = 0;
+
+        foreach (var effect in list)
+        {
+            cumulativeWeight += effect.Weight;
+            if (randomValue <= cumulativeWeight)
+                return effect;
+        }
+
+        return list[^1];
+    }
+
+    private int CalculateTotalWeight(List<RadiationEffectPrototype> list)
+    {
+        var totalWeight = 0;
+        foreach (var effect in list)
+            totalWeight += effect.Weight;
+
+        return totalWeight;
+    }
+
+    private List<RadiationEffectPrototype> WhiteListPrototypes(List<RadiationEffectPrototype> list, EntityUid uid)
+    {
+        var availableProtos = new List<RadiationEffectPrototype>();
+        foreach (var effect in list)
+        {
+            if (effect.WhiteList is not null && _whiteList.IsWhitelistFail(effect.WhiteList, uid))
+                continue;
+
+            if (effect.BlackList is not null && _whiteList.IsBlacklistPass(effect.BlackList, uid))
+                continue;
+
+            availableProtos.Add(effect);
+        }
+
+        return availableProtos;
     }
 }
