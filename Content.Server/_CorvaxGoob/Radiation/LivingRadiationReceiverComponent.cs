@@ -10,7 +10,10 @@ public sealed partial class LivingRadiationReceiverComponent : Component
     public float EffectThreshold = 100;
 
     [DataField]
-    public float CurrentRadiationLevel = 0;
+    public float CurrentRadiationThreshold = 0;
+
+    [DataField]
+    public float CurrentRadiationLevel = 1;
 
     [DataField]
     public HashSet<RadiationEffectPrototype> AppliedEffects = new();

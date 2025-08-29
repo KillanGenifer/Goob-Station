@@ -24,8 +24,8 @@ public sealed class TargetEventsSystem : EntitySystem
 
     private void OnChangeComponent(ChangeComponentTargetEvent ev)
     {
-        AddComponents(ev.Target, ev.ToAdd);
         RemoveComponents(ev.Target, ev.ToRemove);
+        AddComponents(ev.Target, ev.ToAdd);
     }
 
     private void AddComponents(EntityUid target, ComponentRegistry comps)

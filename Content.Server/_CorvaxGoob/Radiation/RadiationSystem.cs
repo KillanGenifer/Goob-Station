@@ -1,4 +1,5 @@
 
+using Content.Shared.Damage;
 using Content.Shared.EntityEffects;
 using Content.Shared.Inventory;
 using Content.Shared.Radiation.Events;
@@ -22,6 +23,7 @@ public sealed class RadiationSystem : EntitySystem
         base.Initialize();
 
         SubscribeLocalEvent<LivingRadiationReceiverComponent, OnIrradiatedEvent>(OnIrradiated);
+        SubscribeLocalEvent<LivingRadiationReceiverComponent, DamageChangedEvent>(OnDamage);
     }
 
     public void ApplyRadiationEffect(EntityUid uid, RadiationEffectPrototype effect)
@@ -36,36 +38,59 @@ public sealed class RadiationSystem : EntitySystem
         }
     }
 
-    public void OnIrradiated(Entity<LivingRadiationReceiverComponent> entity, ref OnIrradiatedEvent ev)
+    private void OnDamage(Entity<LivingRadiationReceiverComponent> entity, ref DamageChangedEvent ev)
     {
-        if (entity.Comp.MinimumRatiadionThreshold > ev.RadsPerSecond)
+        if (!ev.DamageIncreased)
             return;
 
-        var summaryDamage = ev.RadsPerSecond;
+        if (ev.DamageDelta is null)
+            return;
+
+        if (!ev.DamageDelta.DamageDict.TryGetValue("Radiation", out var radDamage))
+            return;
+
+        ev.DamageDelta.DamageDict["Radiation"] = 0;
+
+        Irradiate(entity, radDamage.Float());
+    }
+
+    public void OnIrradiated(Entity<LivingRadiationReceiverComponent> entity, ref OnIrradiatedEvent ev)
+    {
+        Irradiate(entity, ev.RadsPerSecond);
+    }
+
+    public void Irradiate(EntityUid uid, float radiation)
+    {
+        if (!TryComp<LivingRadiationReceiverComponent>(uid, out var radiationReceiver))
+            return;
+
+        if (radiationReceiver.MinimumRatiadionThreshold > radiation)
+            return;
 
         float protectionMultiplier = 1;
 
-        foreach (var slot in entity.Comp.RequiresSlotsProtection)
+        foreach (var slot in radiationReceiver.RequiresSlotsProtection)
         {
-            _inventorySystem.TryGetSlotEntity(entity, slot, out var clothing);
+            _inventorySystem.TryGetSlotEntity(uid, slot, out var clothing);
 
             if (TryComp<ClothingRadiationProtectionComponent>(clothing, out var radiationProtection))
             {
-                protectionMultiplier -= (1 / (float) entity.Comp.RequiresSlotsProtection.Count);
-                summaryDamage *= radiationProtection.ProtectionCoefficient;
+                protectionMultiplier -= (1 / (float) radiationReceiver.RequiresSlotsProtection.Count);
+                radiation *= radiationProtection.ProtectionCoefficient;
             }
         }
 
-        summaryDamage *= protectionMultiplier;
+        radiation *= protectionMultiplier;
 
-        entity.Comp.CurrentRadiationLevel += summaryDamage;
+        radiationReceiver.CurrentRadiationThreshold += radiation;
 
-        if (entity.Comp.CurrentRadiationLevel < entity.Comp.EffectThreshold)
+        if (radiationReceiver.CurrentRadiationThreshold < radiationReceiver.EffectThreshold)
             return;
 
-        entity.Comp.CurrentRadiationLevel = 0;
+        radiationReceiver.CurrentRadiationLevel++;
+        radiationReceiver.CurrentRadiationThreshold = 0;
 
-        var protoList = WhiteListPrototypes(_proto.EnumeratePrototypes<RadiationEffectPrototype>().ToList(), entity);
+        var protoList = WhiteListPrototypes(_proto.EnumeratePrototypes<RadiationEffectPrototype>().ToList(), (uid, radiationReceiver));
         var totalWeight = CalculateTotalWeight(protoList);
 
         for (var i = 0; i < protoList.Count + 1; i++)
@@ -75,18 +100,17 @@ public sealed class RadiationSystem : EntitySystem
             if (effect is null)
                 continue;
 
-            if (entity.Comp.AppliedEffects.Contains(effect) && !effect.CanRepeat || effect.WhiteList is not null
-                && _whiteList.IsBlacklistFail(effect.WhiteList, entity) || effect.Events is null)
+            if (radiationReceiver.AppliedEffects.Contains(effect) && !effect.CanRepeat || effect.Events is null)
             {
                 protoList.Remove(effect);
                 totalWeight -= effect.Weight;
                 continue;
             }
 
-            ApplyRadiationEffect(entity, effect);
+            ApplyRadiationEffect(uid, effect);
 
             if (!effect.CanRepeat)
-                entity.Comp.AppliedEffects.Add(effect);
+                radiationReceiver.AppliedEffects.Add(effect);
 
             return;
         }
@@ -122,15 +146,18 @@ public sealed class RadiationSystem : EntitySystem
         return totalWeight;
     }
 
-    private List<RadiationEffectPrototype> WhiteListPrototypes(List<RadiationEffectPrototype> list, EntityUid uid)
+    private List<RadiationEffectPrototype> WhiteListPrototypes(List<RadiationEffectPrototype> list, Entity<LivingRadiationReceiverComponent> entity)
     {
         var availableProtos = new List<RadiationEffectPrototype>();
         foreach (var effect in list)
         {
-            if (effect.WhiteList is not null && _whiteList.IsWhitelistFail(effect.WhiteList, uid))
+            if (effect.WhiteList is not null && _whiteList.IsWhitelistFail(effect.WhiteList, entity))
                 continue;
 
-            if (effect.BlackList is not null && _whiteList.IsBlacklistPass(effect.BlackList, uid))
+            if (effect.BlackList is not null && _whiteList.IsBlacklistPass(effect.BlackList, entity))
+                continue;
+
+            if (effect.RequiredRadiationLevel > entity.Comp.CurrentRadiationLevel)
                 continue;
 
             availableProtos.Add(effect);

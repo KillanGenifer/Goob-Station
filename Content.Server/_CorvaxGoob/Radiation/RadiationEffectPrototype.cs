@@ -24,4 +24,7 @@ public sealed class RadiationEffectPrototype : IPrototype
 
     [DataField]
     public int Weight = 1;
+
+    [DataField]
+    public int RequiredRadiationLevel = 1;
 }

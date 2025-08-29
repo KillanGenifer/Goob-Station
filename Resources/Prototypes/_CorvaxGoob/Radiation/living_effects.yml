@@ -13,8 +13,8 @@
       messages: "ПИЗДА КОЖА КОРИТ НАХУЙ"
     - !type:HealthChange
       damage:
-        groups:
-          Burn: 10
+        types:
+          Heat: 10
 
 - type: radiationEffect
   id: Vomit
