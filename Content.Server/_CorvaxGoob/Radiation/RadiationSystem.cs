@@ -1,12 +1,12 @@
 
 using Content.Shared.Damage;
-using Content.Shared.EntityEffects;
 using Content.Shared.Inventory;
+using Content.Shared.Mobs.Components;
+using Content.Shared.Mobs.Systems;
 using Content.Shared.Radiation.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Random;
-using System.Diagnostics.Metrics;
 using System.Linq;
 
 namespace Content.Server._CorvaxGoob.Radiation;
@@ -17,6 +17,8 @@ public sealed class RadiationSystem : EntitySystem
     [Dependency] private readonly IRobustRandom _random = default!;
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly EntityWhitelistSystem _whiteList = default!;
+    [Dependency] private readonly DamageableSystem _damageable = default!;
+    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
 
     public override void Initialize()
     {
@@ -64,6 +66,9 @@ public sealed class RadiationSystem : EntitySystem
         if (!TryComp<LivingRadiationReceiverComponent>(uid, out var radiationReceiver))
             return;
 
+        if (!radiationReceiver.WorksOnDead && TryComp<MobThresholdsComponent>(uid, out var mobThresholds) && mobThresholds.CurrentThresholdState == Shared.Mobs.MobState.Dead)
+            return;
+
         if (radiationReceiver.MinimumRatiadionThreshold > radiation)
             return;
 
@@ -89,6 +94,9 @@ public sealed class RadiationSystem : EntitySystem
 
         radiationReceiver.CurrentRadiationLevel++;
         radiationReceiver.CurrentRadiationThreshold = 0;
+
+        if (radiationReceiver.CurrentRadiationLevel >= radiationReceiver.CriticalRadiationLevel)
+            _damageable.TryChangeDamage(uid, radiationReceiver.CriticalRadiationDamage);
 
         var protoList = WhiteListPrototypes(_proto.EnumeratePrototypes<RadiationEffectPrototype>().ToList(), (uid, radiationReceiver));
         var totalWeight = CalculateTotalWeight(protoList);

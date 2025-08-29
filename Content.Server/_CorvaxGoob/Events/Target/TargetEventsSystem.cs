@@ -1,4 +1,10 @@
+using Content.Server.Humanoid;
 using Content.Shared._CorvaxGoob.Events;
+using Content.Shared._CorvaxGoob.Events.Actions;
+using Content.Shared._CorvaxGoob.Events.HumanoidAppearance;
+using Content.Shared.Actions;
+using Content.Shared.Actions.Components;
+using Content.Shared.Prototypes;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.Manager;
 
@@ -7,16 +13,34 @@ namespace Content.Server._CorvaxGoob.Events;
 public sealed class TargetEventsSystem : EntitySystem
 {
     [Dependency] private readonly ISerializationManager _seriMan = default!;
+    [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
+    [Dependency] private readonly SharedActionsSystem _actions = default!;
+    [Dependency] private readonly IPrototypeManager _prototype = default!;
 
     public override void Initialize()
     {
         base.Initialize();
 
         SubscribeLocalEvent<ChangeComponentTargetEvent>(OnChangeComponent);
-        SubscribeLocalEvent<ApplyEntityEffectTargetEvent>(OnEnttyEffectApply);
+        SubscribeLocalEvent<ApplyEntityEffectTargetEvent>(OnEntityEffectApply);
+        SubscribeLocalEvent<RemoveHumanoidAppearanceSlotTargetEvent>(OnRemoveHumanoidAppearanceSlot);
+        SubscribeLocalEvent<GrantActionTargetEvent>(OnGrantActionTargetEvent);
     }
 
-    private void OnEnttyEffectApply(ApplyEntityEffectTargetEvent ev)
+    private void OnRemoveHumanoidAppearanceSlot(RemoveHumanoidAppearanceSlotTargetEvent ev)
+    {
+        _humanoid.RemoveMarking(ev.Target, ev.Category, ev.Slot);
+    }
+
+    private void OnGrantActionTargetEvent(GrantActionTargetEvent ev)
+    {
+        if (!_prototype.TryIndex<EntityPrototype>(ev.Action, out var proto) || !proto.HasComponent<ActionComponent>())
+            return;
+
+        _actions.AddAction(ev.Target, ev.Action);
+    }
+
+    private void OnEntityEffectApply(ApplyEntityEffectTargetEvent ev)
     {
         foreach (var effect in ev.Effects)
             effect.Effect(new Shared.EntityEffects.EntityEffectBaseArgs(ev.Target, EntityManager));

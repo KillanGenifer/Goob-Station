@@ -1,3 +1,5 @@
+using Content.Shared.Damage;
+
 namespace Content.Server._CorvaxGoob.Radiation;
 
 [RegisterComponent]
@@ -14,6 +16,22 @@ public sealed partial class LivingRadiationReceiverComponent : Component
 
     [DataField]
     public float CurrentRadiationLevel = 1;
+
+    [DataField]
+    public float CriticalRadiationLevel = 10;
+
+    [DataField]
+    public bool WorksOnDead = false;
+
+    [DataField]
+    public DamageSpecifier CriticalRadiationDamage = new()
+    {
+        DamageDict = new()
+        {
+            {"Toxin", 5},
+            { "Cellular", 5 }
+        }
+    };
 
     [DataField]
     public HashSet<RadiationEffectPrototype> AppliedEffects = new();

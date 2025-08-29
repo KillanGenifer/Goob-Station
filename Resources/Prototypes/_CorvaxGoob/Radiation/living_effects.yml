@@ -27,3 +27,20 @@
   - !type:ApplyEntityEffectTargetEvent
     effects:
     - !type:ChemVomit
+
+- type: radiationEffect
+  id: LoseHair
+  weight: 1
+  whiteList:
+    components:
+    - MobThresholds
+  events:
+  - !type:RemoveHumanoidAppearanceSlotTargetEvent
+    category: 1
+    slot: 0
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: MediumCaution
+      messages: "Теряет волосы с своей головы.."
+      type: pvs

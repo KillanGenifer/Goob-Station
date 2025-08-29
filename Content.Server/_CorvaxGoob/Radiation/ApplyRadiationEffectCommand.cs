@@ -2,6 +2,7 @@ using Content.Server.Administration;
 using Content.Shared.Administration;
 using Robust.Shared.Console;
 using Robust.Shared.Prototypes;
+using System.Linq;
 
 namespace Content.Server._CorvaxGoob.Radiation;
 
@@ -28,13 +29,10 @@ public sealed class ApplyRadiationEffectCommand : LocalizedEntityCommands
                 return;
         }
 
-        var effect = args[1];
-        var entity = args[0];
-
-        if (!_proto.TryIndex<RadiationEffectPrototype>(effect, out var proto))
+        if (!_proto.TryIndex<RadiationEffectPrototype>(args[1], out var proto))
             return;
 
-        if (!NetEntity.TryParse(entity, out var sourceNet) || !_entityManager.TryGetEntity(sourceNet, out var source) || !_entityManager.EntityExists(source))
+        if (!NetEntity.TryParse(args[0], out var sourceNet) || !_entityManager.TryGetEntity(sourceNet, out var source) || !_entityManager.EntityExists(source))
         {
             shell.WriteLine(Loc.GetString("shell-command-error-euid", ("arg", args[0])));
             return;
@@ -47,11 +45,20 @@ public sealed class ApplyRadiationEffectCommand : LocalizedEntityCommands
 
     public override CompletionResult GetCompletion(IConsoleShell shell, string[] args)
     {
-        return args.Length switch
+        if (args.Length == 1)
+            return CompletionResult.FromHint(Loc.GetString("EntityUid"));
+        else if (args.Length == 2)
         {
-            1 => CompletionResult.FromHint(Loc.GetString("СУЩНОСТЬ")),
-            2 => CompletionResult.FromHint(Loc.GetString("ЭФФЕКТ")),
-            _ => CompletionResult.Empty
-        };
+            var effects = _proto.EnumeratePrototypes<RadiationEffectPrototype>().OrderBy(p => p.ID);
+            var options = new List<string>();
+            foreach (var effect in effects)
+            {
+                options.Add(effect.ID);
+            }
+
+            return CompletionResult.FromHintOptions(options, "<id>");
+        }
+
+        return CompletionResult.Empty;
     }
 }
