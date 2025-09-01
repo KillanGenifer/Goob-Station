@@ -40,12 +40,12 @@ public sealed class TargetEventsSystem : EntitySystem
                 return;
 
             var comp = _entity.GetComponent(ev.Target, registration.Idx);
-            var property = comp.GetType().GetField(operation.Field);
+            var field = comp.GetType().GetField(operation.Field);
 
-            if (property is null)
+            if (field is null)
                 return;
 
-            var newValue = Convert.ToSingle(property.GetValue(comp));
+            var newValue = Convert.ToSingle(field.GetValue(comp));
 
             switch (operation.Operation.ToLower())
             {
@@ -68,7 +68,7 @@ public sealed class TargetEventsSystem : EntitySystem
                     break;
             }
 
-            property.SetValue(comp, newValue);
+            field.SetValue(comp, newValue);
         }
     }
 

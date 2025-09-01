@@ -15,6 +15,9 @@ public sealed partial class LivingRadiationReceiverComponent : Component
     public float CurrentRadiationThreshold = 0;
 
     [DataField]
+    public float RadiationResistance = 1;
+
+    [DataField]
     public float CurrentRadiationLevel = 1;
 
     [DataField]

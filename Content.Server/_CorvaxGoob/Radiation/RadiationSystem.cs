@@ -77,6 +77,8 @@ public sealed class RadiationSystem : EntitySystem
         if (!radiationReceiver.WorksOnDead && TryComp<MobThresholdsComponent>(uid, out var mobThresholds) && mobThresholds.CurrentThresholdState == Shared.Mobs.MobState.Dead)
             return;
 
+        radiation *= radiationReceiver.RadiationResistance;
+
         if (radiationReceiver.MinimumRatiadionThreshold > radiation)
             return;
 
