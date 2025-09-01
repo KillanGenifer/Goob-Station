@@ -52,4 +52,11 @@ public sealed partial class DamageSquareComponent : Component
     /// </summary>
     [DataField, AutoNetworkedField]
     public float ImmunityTime = 0.3f;
+
+    // CorvaxGoob-RadiationStorm
+    /// <summary>
+    /// Deletes the comp when damage someone.
+    /// </summary>
+    [DataField, AutoNetworkedField]
+    public bool DeleteOnActive = true;
 }

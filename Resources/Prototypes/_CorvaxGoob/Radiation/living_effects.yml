@@ -1,34 +1,4 @@
 - type: radiationEffect
-  id: SkinBurn
-  whiteList:
-    components:
-    - MobThresholds
-  canRepeat: true
-  weight: 1
-  events:
-  - !type:ApplyEntityEffectTargetEvent
-    effects:
-    - !type:PopupMessage
-      visualType: LargeCaution
-      messages: "ПИЗДА КОЖА КОРИТ НАХУЙ"
-    - !type:HealthChange
-      damage:
-        types:
-          Heat: 10
-
-- type: radiationEffect
-  id: Vomit
-  canRepeat: true
-  weight: 1
-  whiteList:
-    components:
-    - MobThresholds
-  events:
-  - !type:ApplyEntityEffectTargetEvent
-    effects:
-    - !type:ChemVomit
-
-- type: radiationEffect
   id: LoseHair
   weight: 1
   whiteList:
@@ -44,3 +14,256 @@
       visualType: MediumCaution
       messages: "Теряет волосы с своей головы.."
       type: pvs
+
+- type: radiationEffect
+  id: Vomit
+  canRepeat: true
+  weight: 8
+  whiteList:
+    components:
+    - MobThresholds
+  events:
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:ChemVomit
+
+- type: radiationEffect
+  id: AccentOwO
+  weight: 6
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - MobThresholds
+  events:
+  - !type:ChangeComponentTargetEvent
+    toAdd:
+    - type: OwOAccent
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: LargeCaution
+      messages: "Что-то с моей головой.."
+
+- type: radiationEffect
+  id: DementiaAccent
+  weight: 6
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - MobThresholds
+  events:
+  - !type:ChangeComponentTargetEvent
+    toAdd:
+    - type: DementiaAccent
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: LargeCaution
+      messages: "Что-то с моей головой.."
+
+- type: radiationEffect
+  id: EMP
+  canRepeat: true
+  weight: 8
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - PowerCellSlot
+  events:
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:EmpReactionEffect
+    - !type:PopupMessage
+      visualType: LargeCaution
+      messages: "С батареей что-то происходит!"
+
+- type: radiationEffect
+  id: Glow
+  weight: 8
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - MobThresholds
+  blackList:
+    components:
+    - PointLight
+  events:
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: LargeCaution
+      messages: "Ваша кожа начинает сверкать!"
+  - !type:ChangeComponentTargetEvent
+    toAdd:
+    - type: PointLight
+      radius: 1.5
+      energy: 4
+      color: "#41DC8E"
+
+- type: radiationEffect
+  id: Blindness
+  weight: 8
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - MobThresholds
+  events:
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:Paralyze
+      paralyzeTime: 5
+    - !type:PopupMessage
+      visualType: LargeCaution
+      messages: "Ваши глаза неожиданно теряют способность видеть.."
+  - !type:ChangeComponentTargetEvent
+    toAdd:
+    - type: PermanentBlindness
+
+- type: radiationEffect
+  id: ThermalVision
+  weight: 6
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - MobThresholds
+  blackList:
+    components:
+    - DogVision
+    - UltraVision
+    - NightVision
+  events:
+  - !type:ChangeComponentTargetEvent
+    toAdd:
+    - type: ThermalVision
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: LargeCaution
+      messages: "Вы чувствуете резкую боль в глазах"
+
+- type: radiationEffect
+  id: DogVision
+  weight: 6
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - MobThresholds
+  blackList:
+    components:
+    - ThermalVision
+    - UltraVision
+    - NightVision
+  events:
+  - !type:ChangeComponentTargetEvent
+    toAdd:
+    - type: DogVision
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: LargeCaution
+      messages: "Вы чувствуете резкую боль в глазах"
+
+- type: radiationEffect
+  id: UltraVision
+  weight: 6
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - MobThresholds
+  blackList:
+    components:
+    - ThermalVision
+    - DogVision
+    - NightVision
+  events:
+  - !type:ChangeComponentTargetEvent
+    toAdd:
+    - type: UltraVision
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: LargeCaution
+      messages: "Вы чувствуете резкую боль в глазах"
+
+- type: radiationEffect
+  id: NightVision
+  weight: 6
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - MobThresholds
+  blackList:
+    components:
+    - ThermalVision
+    - DogVision
+    - UltraVision
+  events:
+  - !type:ChangeComponentTargetEvent
+    toAdd:
+    - type: NightVision
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: LargeCaution
+      messages: "Вы чувствуете резкую боль в глазах"
+
+- type: radiationEffect
+  id: Sericulture
+  weight: 6
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - MobThresholds
+  blackList:
+    components:
+    - Sericulture
+  events:
+  - !type:ChangeComponentTargetEvent
+    toAdd:
+    - type: Sericulture
+      action: ActionSericulture
+      productionLength: 2
+      entityProduced: MaterialWebSilk1
+      hungerCost: 4
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: MediumCaution
+      messages: "Вы научились чему то новому" #паутина из которая предмет
+
+- type: radiationEffect
+  id: Spider
+  weight: 6
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - MobThresholds
+  blackList:
+    components:
+    - Spider
+  events:
+  - !type:ChangeComponentTargetEvent
+    toAdd:
+    - type: IgnoreSpiderWeb
+    - type: Spider
+  - !type:ApplyEntityEffectTargetEvent
+    effects:
+    - !type:PopupMessage
+      visualType: MediumCaution
+      messages: "Вы научились чему то новому" #паутина из которая вокруг
+
+- type: radiationEffect
+  id: IncreaseFireRate
+  weight: 6
+  requiredRadiationLevel: 1
+  whiteList:
+    components:
+    - Gun
+  events:
+  - !type:EditNumeralComponentDataTargetEvent
+    operations:
+      - !type:NumeralDataOperation
+        component: Gun
+        field: FireRateModified
+        value: 1000
+        operation: add

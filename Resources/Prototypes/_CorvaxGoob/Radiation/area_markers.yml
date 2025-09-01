@@ -1,0 +1,35 @@
+- type: entity
+  id: MaintenanceAreaMarker
+  parent: MarkerBase
+  components:
+  - type: Sprite
+    layers:
+    - sprite: Markers/atmos.rsi
+      state: base
+      shader: unshaded
+    - sprite: Markers/atmos.rsi
+      shader: unshaded
+      state: maintenance
+  - type: Visibility
+    layer: 5
+
+- type: entity
+  id: Radstorm
+  categories: [ HideSpawnMenu ]
+  components:
+  - type: Sprite
+    sprite: /Textures/Effects/weather.rsi
+    state: ashfall
+    drawdepth: Overdoors
+    color: green
+  - type: Transform
+    anchored: true
+  - type: DamageSquare
+    damage:
+      types:
+        Radiation: 5
+    immunityTime: 5
+    deleteOnActive: false
+  - type: Tag
+    tags:
+    - HideContextMenu

@@ -1,6 +1,7 @@
 using Content.Server.Humanoid;
 using Content.Shared._CorvaxGoob.Events;
 using Content.Shared._CorvaxGoob.Events.Actions;
+using Content.Shared._CorvaxGoob.Events.Components;
 using Content.Shared._CorvaxGoob.Events.HumanoidAppearance;
 using Content.Shared.Actions;
 using Content.Shared.Actions.Components;
@@ -16,6 +17,8 @@ public sealed class TargetEventsSystem : EntitySystem
     [Dependency] private readonly HumanoidAppearanceSystem _humanoid = default!;
     [Dependency] private readonly SharedActionsSystem _actions = default!;
     [Dependency] private readonly IPrototypeManager _prototype = default!;
+    [Dependency] private readonly IComponentFactory _component = default!;
+    [Dependency] private readonly IEntityManager _entity = default!;
 
     public override void Initialize()
     {
@@ -25,6 +28,48 @@ public sealed class TargetEventsSystem : EntitySystem
         SubscribeLocalEvent<ApplyEntityEffectTargetEvent>(OnEntityEffectApply);
         SubscribeLocalEvent<RemoveHumanoidAppearanceSlotTargetEvent>(OnRemoveHumanoidAppearanceSlot);
         SubscribeLocalEvent<GrantActionTargetEvent>(OnGrantActionTargetEvent);
+        SubscribeLocalEvent<EditNumeralComponentDataTargetEvent>(OnEditNumeralComponentDataTargetEvent);
+    }
+
+    private void OnEditNumeralComponentDataTargetEvent(EditNumeralComponentDataTargetEvent ev)
+    {
+        foreach (var operation in ev.Operations)
+        {
+            _component.TryGetRegistration(operation.Component, out var registration, true);
+            if (registration is null)
+                return;
+
+            var comp = _entity.GetComponent(ev.Target, registration.Idx);
+            var property = comp.GetType().GetField(operation.Field);
+
+            if (property is null)
+                return;
+
+            var newValue = Convert.ToSingle(property.GetValue(comp));
+
+            switch (operation.Operation.ToLower())
+            {
+                case "set":
+                    newValue = operation.Value;
+                    break;
+                case "add":
+                    newValue += operation.Value;
+                    break;
+                case "multiply":
+                    newValue *= operation.Value;
+                    break;
+                case "divide":
+                    newValue /= operation.Value;
+                    break;
+                case "subtract":
+                    newValue -= operation.Value;
+                    break;
+                default:
+                    break;
+            }
+
+            property.SetValue(comp, newValue);
+        }
     }
 
     private void OnRemoveHumanoidAppearanceSlot(RemoveHumanoidAppearanceSlotTargetEvent ev)

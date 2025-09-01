@@ -101,7 +101,8 @@ public abstract class SharedDamageSquareSystem : EntitySystem
                 _timing.CurTime + TimeSpan.FromSeconds(field.Comp.ImmunityTime);
         }
 
-        RemComp(field, field.Comp);
+        if (field.Comp.DeleteOnActive) // CorvaxGoob-RadiationStorm
+            RemComp(field, field.Comp);
     }
 
     protected abstract void DoDamage(Entity<DamageSquareComponent> field, Entity<DamageableComponent> entity);

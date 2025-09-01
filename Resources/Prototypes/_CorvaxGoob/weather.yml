@@ -1,0 +1,11 @@
+- type: weather
+  id: RadiationStorm
+  sprite:
+    sprite: /Textures/Effects/weather.rsi
+    state: ashfall
+  color: green
+  sound:
+    path: /Audio/Effects/Weather/snowstorm.ogg
+    params:
+      loop: true
+      volume: -6

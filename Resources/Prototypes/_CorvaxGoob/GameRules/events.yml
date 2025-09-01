@@ -1,0 +1,18 @@
+- type: entity
+  id: RadiationStorm
+  parent: BaseStationEventShortDelay
+  components:
+  - type: StationEvent
+    startAnnouncement: Вблизи станции обнаружен высокий уровень радиации. Технические помещения лучше всего подходят для защиты от радиации.
+    startAudio:
+      path: /Audio/Announcements/radiation.ogg
+      params:
+        volume: -4
+    duration: 60
+    endAnnouncement: Радиационная угроза миновала. Пожалуйста, возвращайтесь на свои рабочие места.
+    weight: 6
+    endAudio:
+      path: /Audio/_CorvaxGoob/Announcements/announce.ogg
+      params:
+        volume: -4
+  - type: RadiationStorm

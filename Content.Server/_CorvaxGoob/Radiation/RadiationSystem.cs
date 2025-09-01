@@ -2,7 +2,6 @@
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
-using Content.Shared.Mobs.Systems;
 using Content.Shared.Radiation.Events;
 using Content.Shared.Whitelist;
 using Robust.Shared.Prototypes;
@@ -18,7 +17,8 @@ public sealed class RadiationSystem : EntitySystem
     [Dependency] private readonly IPrototypeManager _proto = default!;
     [Dependency] private readonly EntityWhitelistSystem _whiteList = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
-    [Dependency] private readonly MobThresholdSystem _mobThreshold = default!;
+
+    private float _damageMultiplier = 5;
 
     public override void Initialize()
     {
@@ -51,9 +51,17 @@ public sealed class RadiationSystem : EntitySystem
         if (!ev.DamageDelta.DamageDict.TryGetValue("Radiation", out var radDamage))
             return;
 
-        ev.DamageDelta.DamageDict["Radiation"] = 0;
+        DamageSpecifier newDamage = new()
+        {
+            DamageDict = new()
+            {
+                {"Radiation", -radDamage}
+            }
+        };
 
-        Irradiate(entity, radDamage.Float());
+        _damageable.TryChangeDamage(entity, newDamage);
+
+        Irradiate(entity, radDamage.Float() * _damageMultiplier);
     }
 
     public void OnIrradiated(Entity<LivingRadiationReceiverComponent> entity, ref OnIrradiatedEvent ev)
