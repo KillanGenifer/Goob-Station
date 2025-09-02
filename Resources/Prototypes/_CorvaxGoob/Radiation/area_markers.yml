@@ -14,7 +14,7 @@
     layer: 5
 
 - type: entity
-  id: Radstorm
+  id: RadstormEffect
   categories: [ HideSpawnMenu ]
   components:
   - type: Sprite
@@ -24,12 +24,6 @@
     color: green
   - type: Transform
     anchored: true
-  - type: DamageSquare
-    damage:
-      types:
-        Radiation: 5
-    immunityTime: 5
-    deleteOnActive: false
   - type: Tag
     tags:
     - HideContextMenu

@@ -1,4 +1,6 @@
 
+using Content.Goobstation.Maths.FixedPoint;
+using Content.Server.Radiation.Components;
 using Content.Shared.Damage;
 using Content.Shared.Inventory;
 using Content.Shared.Mobs.Components;
@@ -24,7 +26,7 @@ public sealed class RadiationSystem : EntitySystem
     {
         base.Initialize();
 
-        SubscribeLocalEvent<LivingRadiationReceiverComponent, OnIrradiatedEvent>(OnIrradiated);
+        SubscribeLocalEvent<RadiationReceiverComponent, OnIrradiatedEvent>(OnIrradiated);
         SubscribeLocalEvent<LivingRadiationReceiverComponent, DamageChangedEvent>(OnDamage);
     }
 
@@ -64,9 +66,26 @@ public sealed class RadiationSystem : EntitySystem
         Irradiate(entity, radDamage.Float() * _damageMultiplier);
     }
 
-    public void OnIrradiated(Entity<LivingRadiationReceiverComponent> entity, ref OnIrradiatedEvent ev)
+    public void OnIrradiated(Entity<RadiationReceiverComponent> entity, ref OnIrradiatedEvent ev)
     {
-        Irradiate(entity, ev.RadsPerSecond);
+        if (HasComp<LivingRadiationReceiverComponent>(entity))
+        {
+            Irradiate(entity, ev.RadsPerSecond);
+            return;
+        }
+
+        if (!TryComp<DamageableComponent>(entity, out var damageable))
+            return;
+
+        var damageValue = FixedPoint2.New(ev.TotalRads);
+
+        DamageSpecifier damage = new();
+        foreach (var typeId in damageable.RadiationDamageTypeIDs)
+        {
+            damage.DamageDict.Add(typeId, damageValue);
+        }
+        _damageable.TryChangeDamage(entity, damage, interruptsDoAfters: false, origin: ev.Origin);
+
     }
 
     public void Irradiate(EntityUid uid, float radiation)

@@ -1,12 +1,19 @@
+using Content.Server._CorvaxGoob.Airlock;
+using Content.Server.Access.Systems;
 using Content.Server.Chat.Systems;
+using Content.Server.Doors.Systems;
 using Content.Server.Radiation.Components;
 using Content.Server.Station.Components;
 using Content.Server.StationEvents.Components;
 using Content.Server.StationEvents.Events;
 using Content.Server.Weather;
+using Content.Shared.Access.Components;
+using Content.Shared.Access.Systems;
 using Content.Shared.Damage;
+using Content.Shared.Doors.Components;
 using Content.Shared.GameTicking.Components;
 using Content.Shared.Maps;
+using Content.Shared.Station.Components;
 using Content.Shared.Weather;
 using Robust.Shared.Map.Components;
 using Robust.Shared.Prototypes;
@@ -27,6 +34,7 @@ public sealed class RadiationStormRule : StationEventSystem<RadiationStormCompon
     [Dependency] private readonly IPrototypeManager _prototypeManager = default!;
     [Dependency] private readonly DamageableSystem _damageable = default!;
     [Dependency] private readonly IEntityManager _entityManager = default!;
+    [Dependency] private readonly AccessReaderSystem _accessReader = default!;
     protected override void Added(EntityUid uid, RadiationStormComponent component, GameRuleComponent gameRule, GameRuleAddedEvent args)
     {
         base.Added(uid, component, gameRule, args);
@@ -34,10 +42,51 @@ public sealed class RadiationStormRule : StationEventSystem<RadiationStormCompon
         component.TimeBeforeAlert = _timing.CurTime + TimeSpan.FromSeconds(_random.NextFloat(component.MinTimeBeforeAlert, component.MaxTimeBeforeAlert));
     }
 
+    protected override void Started(EntityUid uid, RadiationStormComponent component, GameRuleComponent gameRule, GameRuleStartedEvent args)
+    {
+        base.Started(uid, component, gameRule, args);
+
+        if (!TryComp<StationEventComponent>(uid, out var stationEvent))
+            return;
+
+        SetAirlocksEmergencyLock(component, stationEvent, true);
+    }
+
     protected override void ActiveTick(EntityUid uid, RadiationStormComponent component, GameRuleComponent gameRule, float frameTime)
     {
         base.ActiveTick(uid, component, gameRule, frameTime);
 
+        DoPreSpawnTimeChecks(uid, component);
+        DoRadstormTimeChecks(uid, component);
+    }
+
+    private void DoRadstormTimeChecks(EntityUid uid, RadiationStormComponent component)
+    {
+        if (component.DamageTime < _timing.CurTime)
+        {
+            component.DamageTime = _timing.CurTime + TimeSpan.FromSeconds(component.DamageDelay);
+
+            var query = _entityManager.EntityQueryEnumerator<RadiationReceiverComponent>();
+            while (query.MoveNext(out var receiverUid, out var receiverComponent))
+            {
+                if (Transform(receiverUid).GridUid == null) // if entity in space
+                {
+                    _damageable.TryChangeDamage(receiverUid, component.Damage);
+                    return;
+                }
+                else
+                    foreach (var entity in _lookupSystem.GetEntitiesInRange(receiverUid, 0.5f)) // checking in tile range for radstorm
+                    {
+                        var entityProto = MetaData(entity).EntityPrototype;
+                        if (entityProto is not null && entityProto.ID == component.RadstormPrototype)
+                            _damageable.TryChangeDamage(receiverUid, component.Damage);
+                        return;
+                    }
+            }
+        }
+    }
+    private void DoPreSpawnTimeChecks(EntityUid uid, RadiationStormComponent component)
+    {
         if (component.TimeBeforeAlert is not null && component.TimeBeforeAlert < _timing.CurTime)
         {
             if (!TryGetRandomStation(out var stationUid))
@@ -68,16 +117,6 @@ public sealed class RadiationStormRule : StationEventSystem<RadiationStormCompon
 
             component.SpawnStormAt = null;
         }
-
-        if (component.DamageTime < _timing.CurTime)
-        {
-            component.DamageTime = _timing.CurTime + TimeSpan.FromSeconds(component.DamageDelay);
-
-            var query = _entityManager.EntityQueryEnumerator<RadiationReceiverComponent>();
-            while (query.MoveNext(out var receiverUid, out var receiverComponent)) if (Transform(receiverUid).GridUid == null)
-                    _damageable.TryChangeDamage(receiverUid, component.Damage);
-        }
-
     }
 
     private void SpawnStormTiles(RadiationStormComponent component)
@@ -116,7 +155,45 @@ public sealed class RadiationStormRule : StationEventSystem<RadiationStormCompon
             }
 
             if (!isMaints)
-                component.StormEntities.Add(Spawn("Radstorm", tileCenter));
+                component.StormEntities.Add(Spawn(component.RadstormPrototype, tileCenter));
+        }
+    }
+
+    private void SetAirlocksEmergencyLock(RadiationStormComponent rule, StationEventComponent stationEvent, bool unlocked)
+    {
+        if (!TryGetRandomStation(out var station))
+            return;
+
+        var locations = EntityQueryEnumerator<AirlockComponent, AccessReaderComponent, TransformComponent>();
+        var autoLockTime = stationEvent.Duration + _timing.CurTime + TimeSpan.FromSeconds(rule.LockMaintsAfterGameRule);
+
+        if (!autoLockTime.HasValue)
+            return;
+
+        while (locations.MoveNext(out var uid, out var airlock, out var accessReader, out var transform))
+        {
+            if (CompOrNull<StationMemberComponent>(transform.GridUid)?.Station == station)
+            {
+                if (!_accessReader.GetMainAccessReader(uid, out var mainAccessReader))
+                    continue;
+
+                var skipChecks = false;
+
+                foreach (var accessList in mainAccessReader.Value.Comp.AccessLists)
+                {
+                    if (skipChecks) break;
+
+                    foreach (var access in accessList)
+                        if (rule.AirlocksAccessEmergencyList.Contains(access.Id))
+                        {
+                            skipChecks = true;
+
+                            var timedAirlockStatus = EnsureComp<TimedAirlockStatusComponent>(uid);
+                            timedAirlockStatus.SelfDeleteAt = autoLockTime.Value;
+                            continue;
+                        }
+                }
+            }
         }
     }
 

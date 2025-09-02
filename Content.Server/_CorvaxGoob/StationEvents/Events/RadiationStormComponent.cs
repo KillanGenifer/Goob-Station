@@ -1,8 +1,10 @@
+using Content.Shared.Access;
 using Content.Shared.Damage;
 using Content.Shared.Weather;
 using Robust.Shared.Audio;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype;
+using Robust.Shared.Serialization.TypeSerializers.Implementations.Custom.Prototype.List;
 
 namespace Content.Server._CorvaxGoob.StationEvents.Events;
 
@@ -12,6 +14,9 @@ public sealed partial class RadiationStormComponent : Component
     [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
     public string MaintenanceMarker = "MaintenanceAreaMarker";
 
+    [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<EntityPrototype>))]
+    public string RadstormPrototype = "RadstormEffect";
+
     public List<EntityUid> StormEntities = new List<EntityUid>();
 
     [DataField]
@@ -19,6 +24,12 @@ public sealed partial class RadiationStormComponent : Component
 
     [DataField(customTypeSerializer: typeof(PrototypeIdSerializer<WeatherPrototype>))]
     public string WeatherPrototype = "RadiationStorm";
+
+    [DataField(customTypeSerializer: typeof(PrototypeIdListSerializer<AccessLevelPrototype>))]
+    public List<string> AirlocksAccessEmergencyList = new List<string>()
+    {
+        "Maintenance",
+    };
 
     [DataField]
     public EntityUid? AttachedStation;
@@ -28,6 +39,9 @@ public sealed partial class RadiationStormComponent : Component
 
     [DataField]
     public float MaxTimeBeforeAlert = 20;
+
+    [DataField]
+    public float LockMaintsAfterGameRule = 20;
 
     [DataField]
     public TimeSpan? TimeBeforeAlert;

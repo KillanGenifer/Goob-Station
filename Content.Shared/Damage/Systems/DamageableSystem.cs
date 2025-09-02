@@ -143,7 +143,7 @@ namespace Content.Shared.Damage
             SubscribeLocalEvent<DamageableComponent, ComponentInit>(DamageableInit);
             SubscribeLocalEvent<DamageableComponent, ComponentHandleState>(DamageableHandleState);
             SubscribeLocalEvent<DamageableComponent, ComponentGetState>(DamageableGetState);
-            SubscribeLocalEvent<DamageableComponent, OnIrradiatedEvent>(OnIrradiated);
+            // SubscribeLocalEvent<DamageableComponent, OnIrradiatedEvent>(OnIrradiated); CorvaxGoob-Radiation
             SubscribeLocalEvent<DamageableComponent, RejuvenateEvent>(OnRejuvenate);
 
             _appearanceQuery = GetEntityQuery<AppearanceComponent>();
@@ -909,8 +909,8 @@ namespace Content.Shared.Damage
 
         private void OnIrradiated(EntityUid uid, DamageableComponent component, OnIrradiatedEvent args)
         {
-            return;
-
+            /// CorvaxGoob-Radiation : Moved to the radiation refactor systems
+            /*            
             var damageValue = FixedPoint2.New(args.TotalRads);
 
             // Radiation should really just be a damage group instead of a list of types.
@@ -920,7 +920,7 @@ namespace Content.Shared.Damage
                 damage.DamageDict.Add(typeId, damageValue);
             }
 
-            TryChangeDamage(uid, damage, interruptsDoAfters: false, origin: args.Origin);
+            TryChangeDamage(uid, damage, interruptsDoAfters: false, origin: args.Origin);*/
         }
 
         private void OnRejuvenate(EntityUid uid, DamageableComponent component, RejuvenateEvent args)

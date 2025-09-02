@@ -1,5 +1,3 @@
-using Content.Shared.EntityEffects;
-
 namespace Content.Shared._CorvaxGoob.Events.Actions;
 
 [Serializable, DataDefinition]
