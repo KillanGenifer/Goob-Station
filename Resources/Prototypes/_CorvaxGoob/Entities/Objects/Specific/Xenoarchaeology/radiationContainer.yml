@@ -1,0 +1,159 @@
+- type: entity
+  id: CrateRadiationContainer
+  parent: BaseStructureDynamic
+  name: противорадиационный контейнер
+  description: Лучше с ним, чем с лучевой болезнью.
+  components:
+    - type: Transform
+      noRot: true
+    - type: AccessReader
+      access: [["Research"], ["Cargo"]]
+    - type: Lock
+    - type: ResistLocker
+    - type: Sprite
+      drawdepth: Objects
+      sprite: _CorvaxGoob/Objects/Storage/radiation_container/radiationcontainer.rsi
+      layers:
+      - state: lead_container
+        map: ["enum.StorageVisualLayers.Base"]
+      - state: lead_container_door
+        map: ["enum.StorageVisualLayers.Door"]
+      - state: welded
+        visible: false
+        map: ["enum.WeldableLayers.BaseWelded"]
+      - state: locked
+        map: ["enum.LockVisualLayers.Lock"]
+        shader: unshaded
+      - state: paper
+        map: ["enum.PaperLabelVisuals.Layer"]
+    - type: InteractionOutline
+    - type: Physics
+    - type: Fixtures
+      fixtures:
+        fix1:
+          shape:
+            !type:PhysShapeCircle
+            radius: 0.45
+          density: 50
+          mask:
+          - CrateMask #this is so they can go under plastic flaps
+          layer:
+          - MachineLayer
+    - type: Icon
+      sprite: _CorvaxGoob/Objects/Storage/radiation_container/radiationcontainer.rsi
+      state: lead_container_icon
+    - type: EntityStorage
+      capacity: 1
+      whitelist:
+        components:
+        - RadiationReceiver
+    - type: Weldable
+    - type: RadiationBlockingContainer
+      resistance: 50
+    - type: PlaceableSurface
+      isPlaceable: false
+    - type: Damageable
+      damageContainer: StructuralInorganic
+      damageModifierSet: StructuralMetallicStrong
+    - type: Destructible
+      thresholds:
+        - trigger:
+            !type:DamageTrigger
+            damage: 50
+          behaviors:
+            - !type:DoActsBehavior
+              acts: ["Destruction"]
+    - type: PaperLabel
+      labelSlot:
+        insertVerbText: comp-paper-label-insert
+        ejectVerbText: comp-paper-label-eject
+        whitelist:
+          components:
+            - Paper
+        blacklist:
+          tags:
+          - Book
+    - type: Appearance
+    - type: EntityStorageVisuals
+      stateDoorOpen: lead_container_open
+      stateDoorClosed: lead_container_door
+    - type: GenericVisualizer
+      visuals:
+        enum.PaperLabelVisuals.HasLabel:
+          enum.PaperLabelVisuals.Layer:
+            True: { visible: true }
+            False: { visible: false }
+        enum.PaperLabelVisuals.LabelType:
+          enum.PaperLabelVisuals.Layer:
+            Paper: { state: paper }
+            Bounty: { state: bounty }
+            CaptainsPaper: { state: captains_paper }
+            Invoice: { state: invoice }
+        enum.StorageVisuals.Open:
+          enum.PaperLabelVisuals.Layer:
+            True: { offset: "0.0,0.3125" }
+            False: { offset: "0.0,0.0" }
+    - type: LockVisuals
+    - type: ItemSlots
+    - type: ContainerContainer
+      containers:
+        entity_storage: !type:Container
+        paper_label: !type:ContainerSlot
+    - type: StaticPrice
+      price: 1100
+
+- type: entity
+  parent: BaseStorageItem
+  id: HandheldRadiationContainer
+  name: ручной противорадиационный контейнер
+  description: Лучше с ним, чем с лучевой болезнью.
+  components:
+  - type: Sprite
+    scale: 0.7, 0.7
+    sprite: _CorvaxGoob/Objects/Storage/radiation_container/Handheldradiation_container.rsi
+    state: Handheldradiation_container
+  - type: MeleeWeapon
+    damage:
+      types:
+        Blunt: 12
+    soundHit:
+      path: "/Audio/Weapons/smash.ogg"
+  - type: Appearance
+  - type: RadiationBlockingContainer
+    resistance: 50
+  - type: EmitSoundOnLand
+    sound:
+      path: /Audio/Items/toolbox_drop.ogg
+  - type: Damageable
+    damageContainer: StructuralInorganic
+    damageModifierSet: StructuralMetallicStrong
+  - type: Destructible
+    thresholds:
+      - trigger:
+          !type:DamageTrigger
+          damage: 50
+        behaviors:
+          - !type:DoActsBehavior
+            acts: ["Destruction"]
+  - type: ContainerContainer
+    containers:
+      paper_label: !type:ContainerSlot
+      storagebase: !type:Container
+        ents: []
+  - type: GenericVisualizer
+    visuals:
+      enum.ToggleableVisuals.Enabled:
+        enum.ToggleableVisuals.Layer:
+          True: { state: Handheldradiation_container_open }
+          False: { state: Handheldradiation_container }
+  - type: Item
+    sprite: _CorvaxGoob/Objects/Storage/radiation_container/Handheldradiation_container.rsi
+    size: Huge
+  - type: Storage
+    maxItemSize: Normal
+    grid:
+    - 0,0,2,2
+    whitelist:
+      components:
+       - RadiationReceiver
+  - type: ItemSlots

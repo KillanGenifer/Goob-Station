@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "size": {
+    "x": 32,
+    "y": 32
+  },
+  "license": "CC-BY-SA-3.0",
+  "copyright": "Taken from methedron",
+  "states": [
+    {
+      "name": "Handheldradiation_container"
+    },
+    {
+      "name": "Handheldradiation_container_hand"
+    },
+    {
+      "name": "Handheldradiation_container_icon"
+    },
+    {
+      "name": "Handheldradiation_container_open"
+    }
+   ]
+}
