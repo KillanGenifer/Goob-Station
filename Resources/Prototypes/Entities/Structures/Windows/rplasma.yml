@@ -49,8 +49,7 @@
     damageContainer: StructuralInorganic
     damageModifierSet: RGlass
   - type: RadiationBlocker
-    resistance: 4 # CorvaxGoob Radiation Overhaul Revert
-    #resistance: 10 # Goobstation - Radiation Overhaul
+    resistance: 10 # Goobstation - Radiation Overhaul
   - type: Destructible
     thresholds:
     - trigger:
@@ -123,8 +122,7 @@
   - type: Damageable
     damageModifierSet: RGlass
   - type: RadiationBlocker
-    resistance: 2 # CorvaxGoob Radiation Overhaul Revert
-    #resistance: 5 # Goobstation - Radiation Overhaul
+    resistance: 5 # Goobstation - Radiation Overhaul
   - type: Destructible
     thresholds:
     - trigger:

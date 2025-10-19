@@ -102,7 +102,6 @@ public sealed partial class SupermatterComponent : Component
     [DataField("radiationOutputFactor")]
     [ViewVariables(VVAccess.ReadWrite)]
     public float RadiationOutputFactor = 0.03f;
-
     #endregion SM Base
 
     #region SM Sound
