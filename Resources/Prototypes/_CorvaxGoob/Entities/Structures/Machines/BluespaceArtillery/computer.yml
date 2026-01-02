@@ -1,0 +1,56 @@
+- type: entity
+  id: BSAControlBox
+  name: консоль управления БСА
+  description: В нём задаётся точка выстрела БСА.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Damageable
+  - type: Sprite
+    sprite: _CorvaxGoob/Structures/Machines/BluespaceArtillery/computer.rsi
+    noRot: false
+    state: completed
+  - type: ApcPowerReceiver
+    powerLoad: 250
+  - type: ExtensionCableReceiver
+  - type: ActivatableUIRequiresPower
+  - type: Wires
+    boardName: wires-board-name-pa
+    layoutId: ParticleAccelerator
+  - type: AccessReader
+    access: [["Command"]]
+  - type: InteractionOutline
+  - type: Anchorable
+  - type: Rotatable
+  - type: Physics
+    bodyType: Static
+  - type: UserInterface
+    interfaces:
+      enum.BSAControlBoxUiKey.Key:
+        type: BSAControlBoxBoundUserInterface
+  - type: ActivatableUI
+    key: enum.BSAControlBoxUiKey.Key
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-0.45,-0.45,0.45,0.45"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: Pullable
+  - type: Clickable
+  - type: Appearance
+  - type: Computer
+    board: ComputerBSAControlBoxCircuitboard
+  - type: Construction
+    graph: Computer
+    node: computer
+    containers:
+      - board

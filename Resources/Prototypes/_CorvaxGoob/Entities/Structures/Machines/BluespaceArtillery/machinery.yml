@@ -1,0 +1,121 @@
+- type: entity
+  id: BSAEmitterCircuitboard
+  parent: BaseMachineCircuitboard
+  name: плата излучителя БСА
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: BSAEmitter
+      stackRequirements:
+        Glass: 25
+        Steel: 10
+        CableHV: 15
+        BSCrystal: 2
+
+- type: entity
+  id: BSAEmitter
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: излучитель БСА
+  description: Основная пушка для выстрела.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Rotatable
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: BSAPart
+    partType: Emitter
+  - type: Sprite
+    sprite: _CorvaxGoob/Structures/Machines/BluespaceArtillery/machinery.rsi
+    state: emitter_center
+  - type: Machine
+    board: BSAEmitterCircuitboard
+
+- type: entity
+  id: BSAFuelChamber
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: топливный бак БСА
+  description: Использует материю БС для выстрела.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Rotatable
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: BSAPart
+    partType: FuelChamber
+  - type: Sprite
+    sprite: _CorvaxGoob/Structures/Machines/BluespaceArtillery/machinery.rsi
+    state: fuel_chamber
+  - type: Machine
+    board: BSAFuelChamberCircuitboard
+
+- type: entity
+  id: BSAPowerBox
+  parent: [ BaseMachinePowered, ConstructibleMachine ]
+  name: блок питания БСА
+  description: Собирает энергию для совершения выстрела.
+  placement:
+    mode: SnapgridCenter
+  components:
+  - type: Rotatable
+  - type: Transform
+    anchored: true
+    noRot: false
+  - type: BSAPart
+    partType: PowerBox
+  - type: Sprite
+    sprite: _CorvaxGoob/Structures/Machines/BluespaceArtillery/machinery.rsi
+    state: power_box
+  - type: Machine
+    board: BSAPowerBoxCircuitboard
+
+- type: entity
+  parent: BaseComputerCircuitboard
+  id: ComputerBSAControlBoxCircuitboard
+  name: консоль управления БСА
+  components:
+    - type: Sprite
+      state: cpu_command
+    - type: ComputerBoard
+      prototype: BSAControlBox
+
+- type: entity
+  id: BSAFuelChamberCircuitboard
+  parent: BaseMachineCircuitboard
+  name: плата топливного бака БСА
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: BSAFuelChamber
+      stackRequirements:
+        Glass: 10
+        Steel: 20
+        CableHV: 5
+        BSCrystal: 1
+      componentRequirements:
+        AmeFuelContainer:
+          amount: 3
+          defaultPrototype: AmeJar
+
+- type: entity
+  id: BSAPowerBoxCircuitboard
+  parent: BaseMachineCircuitboard
+  name: плата блока питания БСА
+  components:
+    - type: Sprite
+      state: engineering
+    - type: MachineBoard
+      prototype: BSAPowerBox
+      stackRequirements:
+        Glass: 30
+        Steel: 30
+        CableHV: 20
+        CableMV: 20
+        Cable: 20
+        BSCrystal: 2
+        Manipulator: 4

@@ -1,0 +1,76 @@
+{
+    "version": 1,
+    "license": "CC-BY-SA-3.0",
+    "copyright": "Taken from tgstation at https://github.com/tgstation/tgstation/blob/master/icons/obj/devices/blackmarket.dmi",
+    "size": {
+        "x": 32,
+        "y": 32
+    },
+    "states": [
+	    {
+            "name": "unlitp"
+        },
+        {
+            "name": "completed",
+            "delays": [
+                [
+                    0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+                    0.1
+                ]
+            ]
+        },
+		{
+            "name": "control_box_reloading",
+            "delays": [
+                [
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+                    0.1,
+					0.1,
+					0.1,
+					0.1,
+					0.1,
+                    0.1
+                ]
+            ]
+        }
+    ]
+}

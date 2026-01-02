@@ -1,0 +1,45 @@
+- type: entity
+  parent: BaseMachinePowered
+  id: BSACannonEAST
+  name: блюспейс артиллерия
+  description: Огромное устройство, способная совершать выстрелы, используя энергию БС. Разрушительная.
+  components:
+  - type: InteractionOutline
+  - type: Transform
+    noRot: false
+  - type: Destructible
+    thresholds:
+    - trigger: !type:DamageTrigger
+        damage: 2000
+      behaviors:
+      - !type:ExplodeBehavior
+      - !type:DoActsBehavior
+        acts: ["Destruction"]
+  - type: Explosive
+    explosionType: Bluespace
+    deleteAfterExplosion: false
+    totalIntensity: 10000
+    intensitySlope: 20
+    maxIntensity: 2500
+  - type: Sprite
+    sprite: _CorvaxGoob/Structures/Machines/BluespaceArtillery/bsa.rsi
+    state: bsa_east
+  - type: Fixtures
+    fixtures:
+      fix1:
+        shape:
+          !type:PhysShapeAabb
+          bounds: "-5.5,-0.6,5.5,1.5"
+        density: 190
+        mask:
+        - MachineMask
+        layer:
+        - MachineLayer
+
+- type: entity
+  parent: BSACannonEAST
+  id: BSACannonWEST
+  components:
+  - type: Sprite
+    sprite: _CorvaxGoob/Structures/Machines/BluespaceArtillery/bsa.rsi
+    state: bsa_west
