@@ -210,7 +210,7 @@ public sealed class PlayTimeAddRoleCommand : IConsoleCommand
     }
 }
 
-[AdminCommand(AdminFlags.Playtime)] // CorvaxGoob-DiscordRoles
+[AdminCommand(AdminFlags.Moderator)]
 public sealed class PlayTimeGetOverallCommand : IConsoleCommand
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -255,7 +255,7 @@ public sealed class PlayTimeGetOverallCommand : IConsoleCommand
     }
 }
 
-[AdminCommand(AdminFlags.Playtime)] // CorvaxGoob-DiscordRoles
+[AdminCommand(AdminFlags.Moderator)]
 public sealed class PlayTimeGetRoleCommand : IConsoleCommand
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
@@ -334,7 +334,7 @@ public sealed class PlayTimeGetRoleCommand : IConsoleCommand
 /// <summary>
 /// Saves the timers for a particular player immediately
 /// </summary>
-[AdminCommand(AdminFlags.Playtime)] // CorvaxGoob-DiscordRoles
+[AdminCommand(AdminFlags.Moderator)]
 public sealed class PlayTimeSaveCommand : IConsoleCommand
 {
     [Dependency] private readonly IPlayerManager _playerManager = default!;
