@@ -4,6 +4,7 @@ using Content.Shared._CorvaxGoob.Photo;
 using Robust.Shared.Player;
 using Robust.Shared.Timing;
 using System.Linq;
+using System.Numerics;
 
 namespace Content.Server._CorvaxGoob.Photo;
 
@@ -51,7 +52,7 @@ public sealed class CaptureSystem : EntitySystem
         _captureScreenRequests.RemoveAll(req => req.TimeoutTime < _timing.CurTime);
     }
 
-    public void RequestScreenCapture(ICommonSession session, ICommonSession requestBy)
+    public void RequestScreenCapture(ICommonSession session, ICommonSession requestBy, bool save = false)
     {
         if (_captureScreenRequests.Any(req => req.RequestBy == requestBy))
         {
@@ -64,6 +65,7 @@ public sealed class CaptureSystem : EntitySystem
         requestHolder.Player = session;
         requestHolder.RequestBy = requestBy;
         requestHolder.TimeoutTime = _timing.CurTime + _requestTimeoutTime;
+        requestHolder.Save = save;
 
         _captureScreenRequests.Add(requestHolder);
         RaiseNetworkEvent(new CaptureScreenRequestEvent(), session);
@@ -81,7 +83,7 @@ public sealed class CaptureSystem : EntitySystem
         {
             if (request.Player == args.SenderSession)
             {
-                var eui = new ImageEui(ev.Image);
+                var eui = new ImageEui(ev.Image, new Vector2(0.5f, 0.5f), request.Save);
 
                 _eui.OpenEui(eui, request.RequestBy);
                 eui.DoStateUpdate();
@@ -97,4 +99,5 @@ public struct CaptureScreenRequest
     public ICommonSession RequestBy;
     public ICommonSession Player;
     public TimeSpan TimeoutTime;
+    public bool Save;
 }

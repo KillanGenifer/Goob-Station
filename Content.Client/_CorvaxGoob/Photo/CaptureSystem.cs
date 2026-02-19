@@ -1,13 +1,13 @@
+using Content.Client.UserInterface.Controls;
 using Content.Shared._CorvaxGoob.Photo;
-using Robust.Client.Graphics;
+using Robust.Client.UserInterface;
 using SixLabors.ImageSharp;
 using System.IO;
 
 namespace Content.Client._CorvaxGoob.Photo;
-
 public sealed class CaptureSystem : EntitySystem
 {
-    [Dependency] private readonly IClyde _clyde = default!;
+    [Dependency] private readonly IUserInterfaceManager _uiManager = default!;
 
     public override void Initialize()
     {
@@ -18,11 +18,19 @@ public sealed class CaptureSystem : EntitySystem
 
     private async void RequestCaptureScreen(CaptureScreenRequestEvent ev)
     {
-        var capture = await _clyde.ScreenshotAsync(ScreenshotType.Final);
-        using (MemoryStream ms = new MemoryStream())
+        if (_uiManager.ActiveScreen == null || !_uiManager.ActiveScreen!.TryGetWidget<MainViewport>(out var mainViewport))
+            return;
+
+        mainViewport.Viewport.Screenshot(image =>
         {
-            await capture.SaveAsPngAsync(ms);
-            RaiseNetworkEvent(new CaptureScreenResponseEvent(ms.ToArray()));
-        }
+            using var data = new MemoryStream();
+
+            image.SaveAsPng(data);
+            var bytes = data.ToArray();
+
+            image.Dispose();
+
+            RaiseNetworkEvent(new CaptureScreenResponseEvent(bytes));
+        });
     }
 }

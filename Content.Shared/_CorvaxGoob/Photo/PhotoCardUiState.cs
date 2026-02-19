@@ -1,5 +1,6 @@
 using Content.Shared.Eui;
 using Robust.Shared.Serialization;
+using System.Numerics;
 
 namespace Content.Shared._CorvaxGoob.Photo;
 
@@ -38,9 +39,13 @@ public sealed class CaptureScreenResponseEvent : EntityEventArgs
 public sealed class ImageEuiState : EuiStateBase
 {
     public byte[]? Image;
+    public Vector2? Scale;
+    public bool Save;
 
-    public ImageEuiState(byte[] image)
+    public ImageEuiState(byte[] image, Vector2? scale = null, bool save = false)
     {
         Image = image;
+        Scale = scale;
+        Save = save;
     }
 }

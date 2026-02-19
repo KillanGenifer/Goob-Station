@@ -24,6 +24,12 @@ public sealed class CaptureCommand : IConsoleCommand
             return;
         }
 
+        if (args.Length < 1)
+        {
+            shell.WriteLine(Loc.GetString("shell-wrong-arguments-number"));
+            return;
+        }
+
         if (args[0] is null)
         {
             shell.WriteLine(Loc.GetString("shell-target-player-does-not-exist"));
@@ -36,7 +42,12 @@ public sealed class CaptureCommand : IConsoleCommand
             return;
         }
 
-        _manager.System<CaptureSystem>().RequestScreenCapture(session, shell.Player);
+        var save = false;
+
+        if (args.Length > 1)
+            save = bool.Parse(args[1]);
+
+        _manager.System<CaptureSystem>().RequestScreenCapture(session, shell.Player, save);
     }
 
     public CompletionResult GetCompletion(IConsoleShell shell, string[] args)
@@ -44,6 +55,13 @@ public sealed class CaptureCommand : IConsoleCommand
         if (args.Length == 1)
         {
             return CompletionResult.FromHintOptions(CompletionHelper.SessionNames(), Loc.GetString("shell-argument-username-hint"));
+        }
+
+        if (args.Length == 2)
+        {
+            return CompletionResult.FromHintOptions(
+                ["true", "false"],
+                Loc.GetString("cmd-screencapture-savecapture"));
         }
 
         return CompletionResult.Empty;
