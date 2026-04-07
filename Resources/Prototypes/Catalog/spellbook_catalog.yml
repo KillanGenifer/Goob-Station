@@ -204,9 +204,6 @@
     WizCoin: 2
   categories:
   - SpellbookEquipment
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
 
 - type: listing
   id: SpellbookHammerSingularity
@@ -214,36 +211,34 @@
   description: spellbook-hammer-singularity-description
   productEntity: SingularityHammer
   cost:
-    WizCoin: 2
+    WizCoin: 1 # Goob edit
   categories:
   - SpellbookEquipment
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
 
-- type: listing
-  id: SpellbookStaffAnimation
-  name: spellbook-staff-animation-name
-  description: spellbook-staff-animation-description
-  productEntity: AnimationStaff
-  cost:
-    WizCoin: 3
-  categories:
-  - SpellbookEquipment
-  conditions:
-  - !type:ListingLimitedStockCondition
-    stock: 1
+# Goob edit
+#- type: listing
+#  id: SpellbookStaffAnimation
+#  name: spellbook-staff-animation-name
+#  description: spellbook-staff-animation-description
+#  productEntity: AnimationStaff
+#  cost:
+#    WizCoin: 3
+#  categories:
+#  - SpellbookEquipment
+#  conditions:
+#  - !type:ListingLimitedStockCondition
+#    stock: 1
 
 # Event
 - type: listing
   id: SpellbookEventSummonGhosts
   name: spellbook-event-summon-ghosts-name
   description: spellbook-event-summon-ghosts-description
-  productEvent: !type:SummonGhostsEvent # Goobstation
+  # productEvent: !type:SummonGhostsEvent # Goobstation : reverted by CorvaxGoob
   icon: # Goobstation
     sprite: Mobs/Ghosts/ghost_human.rsi
     state: icon
-  # productAction: ActionSummonGhosts # Goobstation
+  productAction: ActionSummonGhosts # Goobstation : reverted by CorvaxGoob
   cost:
     WizCoin: 0
   categories:

@@ -23,9 +23,10 @@ on:
   workflow_dispatch:
   schedule:
   - cron: '0 1 * * *'
+
 jobs:
   build:
-    runs-on: [self-hosted]
+    runs-on: ubuntu-latest
     steps:
     - name: Fail if we are attempting to run on the master branch
       if: ${{GITHUB.REF_NAME == 'master' && github.repository == 'space-wizards/space-station-14'}}
@@ -52,6 +53,8 @@ jobs:
         echo "  Port 22" >> ~/.ssh/config
         echo "  StrictHostKeyChecking no" >> ~/.ssh/config
         git clone git@github.com:corvax-nexus/secrets.git Secrets
+        cd Secrets
+        git checkout goob && cd ..
         cp -R Secrets/Resources/Prototypes Resources/Prototypes/CorvaxSecrets
         cp -R Secrets/Resources/ServerPrototypes Resources/Prototypes/CorvaxSecretsServer
         cp -R Secrets/Resources/Locale Resources/Locale/ru-RU/corvax-secrets

@@ -48,6 +48,13 @@ public sealed partial class AlertLevelDetail
     /// </summary>
     [DataField("announcement")] public string Announcement { get; private set; } = string.Empty;
 
+    // CorvaxGoob-custom-alert-instructions-in-pda-start
+    /// <summary>
+    /// Instruction of alert level in pda
+    /// </summary>
+    [DataField("instruction")] public string AlertLevelInstruction { get; private set; } = string.Empty;
+    // CorvaxGoob-custom-alert-instructions-in-pda-end
+
     /// <summary>
     /// Whether this alert level is selectable from a communications console.
     /// </summary>
@@ -92,4 +99,11 @@ public sealed partial class AlertLevelDetail
     /// How long it takes for the shuttle to arrive when called.
     /// </summary>
     [DataField("shuttleTime")] public TimeSpan ShuttleTime { get; private set; } = TimeSpan.FromMinutes(5);
+
+    /// <summary>
+    /// Goobstation
+    /// Marks this alert level as eligible for announcement console EMAG-ing.
+    /// Exists so checks run in the right order.
+    /// </summary>
+    [DataField] public bool EmagSelectable { get; private set; }
 }

@@ -143,12 +143,25 @@
       inverted: true
       species:
       - Felinid
+    - !type:SpeciesRequirement # CorvaxGoob-Species
+      inverted: true
+      species:
+      - Abductor
   weight: 10
   startingGear: QuartermasterGear
   icon: "JobIconQuarterMaster"
   supervisors: job-supervisors-captain
   canBeAntag: false
   #goobcoins: 40 #Goob content Corvax-Goob-coins
+  skills: # CorvaxGoob-Skills
+  - ShuttleControl
+  #canBeAntag: false
+  antagAdvantage: 75 # Goobstation
+  guides: # goobstation
+  - Cargo
+  # - Quartermaster SOP Hidden by CorvaxGoob
+  # - Cargo SOP Hidden by CorvaxGoob
+  - Command
   access:
   - Cargo
   - Salvage
@@ -165,9 +178,7 @@
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-      - type: Skills # CorvaxGoob-Skills
-        skills:
-        - ShuttleControl
+      - type: QuartermasterTraining
 
 - type: startingGear
   id: QuartermasterGear

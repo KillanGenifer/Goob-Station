@@ -1,3 +1,12 @@
+signal-port-name-powered = Запитан
+signal-port-description-powered = Этот порт активируется с высоким или низким уровнем, в зависимости от питания.
+signal-port-name-plumbing-input = Труба: Вход
+signal-port-description-plumbing-input = Слот автоматизации трубы для подачи жидкостей.
+signal-port-name-plumbing-output = Труба: Выход
+signal-port-description-plumbing-output = Слот автоматизации трубы для вывода жидкостей.
+signal-port-name-plumbing-dispenser = Труба: Раздатчик
+signal-port-description-plumbing-dispenser = Слот автоматизации трубы для подачи жидкостей в колбу раздатчика или из неё.
+
 # Роботизированная рука
 
 signal-port-name-input-machine = Предмет: Машина ввода
@@ -41,14 +50,14 @@ signal-port-description-storage-inserted = Сигнальный порт, кот
 signal-port-name-storage-removed = Удалено
 signal-port-description-storage-removed = Сигнальный порт, который активируется после удаления предмета из контейнера.
 
-# Факсовая машина
+# Факс
 
 signal-port-name-automation-slot-paper = Предмет: Бумага
 signal-port-description-automation-slot-paper = Слот автоматизации для лотка с бумагой факсовой машины.
 signal-port-name-fax-copy = Копировать факс
 signal-port-description-fax-copy = Сигнальный порт для копирования бумаги факсовой машины.
 
-# Конструктор / Интеректор
+# Конструктор / Исполнитель
 
 signal-port-name-machine-start = Запуск
 signal-port-description-machine-start = Сигнальный порт для однократного запуска машины.
@@ -61,7 +70,7 @@ signal-port-description-machine-completed = Сигнальный порт, ко�
 signal-port-name-machine-failed = Сбой
 signal-port-description-machine-failed = Сигнальный порт, который активируется, если машина не смогла запуститься.
 
-# Интеректор
+# Исполнитель
 
 signal-port-name-automation-slot-tool = Предмет: Инструмент
 signal-port-description-automation-slot-tool = Слот автоматизации для удерживаемого инструмента интеректора.
@@ -70,11 +79,18 @@ signal-port-description-automation-slot-tool = Слот автоматизаци
 
 signal-port-name-automation-slot-autodoc-hand = Предмет: Рука автодока
 signal-port-description-automation-slot-autodoc-hand = Слот автоматизации для удерживаемого автодоком органа/части и т.п. из инструкций STORE ITEM / GRAB ITEM.
+signal-port-name-alt-interact = Альт. взаимодействие
+signal-port-description-alt-interact = Порт сигнала для переключения режима альтернативного взаимодействия или установки значения HIGH/LOW.
 signal-port-name-automation-slot-gas-tank = Слот: Баллон
 signal-port-description-automation-slot-gas-tank = Автоматизированный слот для газовой емкости.
 signal-port-name-rad-empty = Пусто
 signal-port-description-rad-empty = Выдает сигнал HIGH, если емкость отсутствует или заполнена менее чем на 33%, в остальных случаях - LOW.
+signal-port-name-automation-slot-bottles = Предмет: Хранилище
+signal-port-description-automation-slot-bottles = Слот автоматизации ХимМастера для таблеток или жидкостей.
 signal-port-name-rad-low = Низкий
 signal-port-description-rad-low = Выдает сигнал HIGH, если емкость заполнена менее чем на 66%, в остальных случаях - LOW.
 signal-port-name-rad-full = Полный
 signal-port-description-rad-full = Выдает сигнал HIGH, если емкость заполнена более чем на 66%, в остальных случаях - LOW.
+# Латы
+signal-port-name-lathe-print = Напечатать последний рецепт
+signal-port-description-lathe-print = Порт сигнала, который печатает последний установленный рецепт при импульсе.

@@ -77,10 +77,8 @@ language-Kobold-name = Кобольд
 language-Kobold-description = Хсс!
 language-Hissing-name = Шипение
 language-Hissing-description = Хсс!
-language-Eldritch-name = Eldritch
-language-Eldritch-description =
-    A language that is considered to be long forgotten - now the only speakers of this profaned tongue of screeches and
-    mumbles are the followers of an ancient God of Blood.
+language-Eldritch-name = Эльдрич
+language-Eldritch-description = Язык, который считается давно забытым — теперь единственными, кто говорит на этом осквернённом языке визгов и бормотания, являются последователи древнего Бога Крови.
 language-Penguin-name = Пингвин
 language-Penguin-description = Ваап!
 language-DroneTalk-name = Дрон
@@ -89,7 +87,7 @@ language-DroneTalk-description = Непонятно большинству лю�
 language-SiikMaas-name = Сиик'маас
 language-SiikMaas-description = Древний религиозный язык таджара, ныне наиболее распространённый и изучаемый язык Адхомаи.
 language-NalRasan-name = Наль'расаан
-language-NalRasan-description = Язык с богатой жестикуляцией, созданный охотниками М'сай для скрытности, позднее adopted повстанцами для тайного общения во время Великой Войны.
+language-NalRasan-description = Язык с богатой жестикуляцией, созданный охотниками М'сай для скрытности, позднее адаптированный повстанцами для тайного общения во время Великой Войны.
 language-SiikTajr-name = Сиик'таджр
 language-SiikTajr-description = Революционный язык, сочетающий Сиик'маас и Наль'расаан, созданный для конспирации во время свержения плутократии и активно использовавшийся в Великой Войне.
 language-YaSsa-name = Я'сса
@@ -100,3 +98,11 @@ language-Shadowmind-name = Тенемыслие
 language-Shadowmind-description = Язык теневых существ. О нём мало что известно, кроме того, что Тралы способны его понимать.
 language-Qiilour-name = Киилур
 language-Qiilour-description = Родной и основной язык Ксельтий, на Киилуре в той или иной степени говорит почти каждый представитель вида. Это утончённый сплав нескольких древних наречий - таких как Теленарии, Воскарн и Древнексельтекский, - ныне утерянных в веках.
+language-Schechi-name = Шшечи
+language-Schechi-description = Язык Резоми, в основном состоящий из переднеязычных согласных, произносимых без округления. Беглые носители звучат очень похоже на пение птиц.
+language-NewKinPidgin-name = Ка'ракк
+language-NewKinPidgin-description =
+    Испорченный диалект, собранный низкокастовыми Воксами, исковерканный до неузнаваемости.
+    Хотя это и примитивная, неуклюжая попытка, превратившаяся в тусклую, упрощённую пародию на их настоящий язык,
+    высококастовые Воксы всё же могут уловить смысл в грубых искажениях.
+    Для всех остальных это звучит как хаотичный визг.

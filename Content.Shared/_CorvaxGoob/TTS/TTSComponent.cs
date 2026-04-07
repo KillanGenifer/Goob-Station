@@ -13,9 +13,8 @@ public sealed partial class TTSComponent : Component
     /// <summary>
     /// Prototype of used voice for TTS.
     /// </summary>
-    [ViewVariables(VVAccess.ReadWrite)]
-    [DataField("voice", serverOnly: true, customTypeSerializer: typeof(PrototypeIdSerializer<TTSVoicePrototype>))]
-    public string? VoicePrototypeId { get; set; }
+    [DataField("voice", customTypeSerializer: typeof(PrototypeIdSerializer<TTSVoicePrototype>))]
+    public string? VoicePrototypeId { get; set; } = "Taskmaster";
 
     /// <summary>
     /// Tells to client dynamic audio system that TTS source in barotrauma. Don't ask me why please.
@@ -23,4 +22,11 @@ public sealed partial class TTSComponent : Component
     [ViewVariables(VVAccess.ReadWrite)]
     [DataField, AutoNetworkedField]
     public bool InBarotrauma { get; set; } = false;
+
+    /// <summary>
+    /// Pitch of played TTS sound.
+    /// </summary>
+    [ViewVariables(VVAccess.ReadWrite)]
+    [DataField("pitch")]
+    public float Pitch { get; set; } = 1;
 }

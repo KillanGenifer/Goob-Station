@@ -64,15 +64,22 @@
   playTimeTracker: JobTechnicalAssistant
   requirements:
     - !type:OverallPlaytimeRequirement
-      time: 1800 # 30 Minutes
+      time: 7200 # 2 hrs
     - !type:DepartmentTimeRequirement
       department: Engineering
-      time: 18000 #5 hrs
+      time: 36000 #10 hrs
       inverted: true # stop playing intern if you're good at engineering!
   startingGear: TechnicalAssistantGear
   icon: "JobIconTechnicalAssistant"
   supervisors: job-supervisors-engineering
   #goobcoins: 20 #Goob content Corvax-Goob-coins
+  skills: # CorvaxGoob-Skills
+  - ShuttleControl
+  - AdvancedBuilding
+  guides: # goobstation
+  - Construction
+  - Power
+  - Networking
   access:
   - Maintenance
   - Engineering
@@ -81,10 +88,6 @@
   - !type:AddComponentSpecial
     components:
     - type: EngineeringStaff
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - ShuttleControl
-      - AdvancedBuilding
 
 - type: startingGear
   id: TechnicalAssistantGear

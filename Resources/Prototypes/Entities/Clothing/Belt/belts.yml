@@ -161,7 +161,9 @@
     sprite: Clothing/Belt/utility.rsi
   - type: Storage
     maxItemSize: Normal
-    # TODO: Fill this out more.
+    # Don't add more than absolutely needed to this whitelist!
+    # Utility belts shouldn't just be free extra storage.
+    # This is only intended for basic engineering equipment.
     whitelist:
       tags:
         - Powerdrill
@@ -181,12 +183,15 @@
         - JawsOfLife
         - GPS
         - WeldingMask
+        - RemoteSignaller
         - Hammer # Goobstation
         - Nailgun # Goobstation
         - MagazineNailgun # Goobstation
+        - HandHeldMassScanner # CorvaxGoob
       components:
         - StationMap
         - SprayPainter
+        - SprayPainterAmmo
         - NetworkConfigurator
         - RCD
         - RCDAmmo
@@ -271,9 +276,11 @@
         - Hammer # Goobstation
         - Nailgun # Goobstation
         - MagazineNailgun # Goobstation
+        - HandHeldMassScanner # CorvaxGoob
       components:
         - StationMap
         - SprayPainter
+        - SprayPainterAmmo
         - NetworkConfigurator
         - RCD
         - RCDAmmo
@@ -341,6 +348,7 @@
         - EnergySpeedloader # Goobstation
         - Sidearm # Goobstation
         - PepperSpray # Goobstation
+        - BolaEnergy # CorvaxGoob
       components:
         - Stunbaton
         - FlashOnTrigger
@@ -390,6 +398,8 @@
         - HolosignProjector
         - Plunger
         - Keyring # Goobstation
+        - GoldenPlunger
+        - WireBrush
       components:
         - LightReplacer
         - SmokeOnTrigger
@@ -585,6 +595,15 @@
         - Skewer
         - MonkeyCube
         - Mayo
+        - Meat #Goobstation start
+        - Mouse
+        - Vegetable
+        - Fruit
+        - Slice
+        - Cake
+        - Pie
+        - Crayon #Its edible
+        - Bread #Goobstation end
       components:
         - Mousetrap
         - Smokable
@@ -661,7 +680,10 @@
         - BolaEnergy # Goobstation
         - EnergySpeedloader # Goobstation
         - MilitaryPowerCell # Goobstation
+        - EnergyMagAmmo # Goobstation
         - HandGrenade
+        - TelescopicBaton # CorvaxGoob
+        - TelescopicShield # CorvaxGoob
       components:
         - Stunbaton
         - FlashOnTrigger
@@ -707,7 +729,7 @@
   - type: ItemSlots
     slots:
       item:
-        name: Sabre
+        # name: Sabre # CorvaxGoob-Loc-in-UI
         insertVerbText: sheath-insert-verb
         ejectVerbText: sheath-eject-verb
         insertSound: /Audio/Items/sheath.ogg
@@ -751,7 +773,7 @@
   - type: ItemSlots
     slots:
       item:
-        name: Handgun
+        # name: Handgun # CorvaxGoob-Loc-in-UI
         whitelist:
           tags:
           - Sidearm
@@ -781,7 +803,7 @@
   - type: ItemSlots
     slots:
       item:
-        name: Gun
+        # name: Gun # CorvaxGoob-Loc-in-UI
         whitelist:
           components:
           - Gun
@@ -853,6 +875,54 @@
     sprite: Clothing/Belt/salvagewebbing.rsi
   - type: Clothing
     sprite: Clothing/Belt/salvagewebbing.rsi
+    # CorvaxGoob-WorkBelts-Techfab-start
+  - type: Storage
+    maxItemSize: Normal
+    whitelist:
+      tags:
+        - Powerdrill
+        - Wirecutter
+        - Crowbar
+        - Screwdriver
+        - Flashlight
+        - Wrench
+        - GeigerCounter
+        - Flare
+        - CableCoil
+        - CigPack
+        - Radio
+        - HolofanProjector
+        - Multitool
+        - AppraisalTool
+        - JawsOfLife
+        - GPS
+        - WeldingMask
+        - RemoteSignaller
+        - Hammer # Goobstation
+        - Nailgun # Goobstation
+        - MagazineNailgun # Goobstation
+        - SeismicCharge # CorvaxGoob
+        - MiningDrill # CorvaxGoob
+        - LavalandJaunter # CorvaxGoob
+        - FlashlightSeclite # CorvaxGoob
+        - MineralScanner # CorvaxGoob
+        - HandHeldMassScanner # CorvaxGoob
+      components:
+        - StationMap
+        - SprayPainter
+        - SprayPainterAmmo
+        - NetworkConfigurator
+        - RCD
+        - RCDAmmo
+        - Welder
+        - PowerCell
+        - Geiger
+        - TrayScanner
+        - GasAnalyzer
+        - HandLabeler
+        - ShelterCapsule # CorvaxGoob
+        - Fulton # CorvaxGoob
+    # CorvaxGoob-WorkBelts-Techfab-end
 
 - type: entity
   parent: [ClothingBeltStorageBase, ContentsExplosionResistanceBase, BaseSyndicateContraband]

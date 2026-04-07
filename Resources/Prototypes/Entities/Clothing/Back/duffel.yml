@@ -167,6 +167,7 @@
   components:
   - type: Sprite
     sprite: Clothing/Back/Duffels/mime.rsi
+  - type: Storage
     storageOpenSound:
       collection: null
     storageInsertSound:
@@ -189,7 +190,6 @@
   components:
     - type: Sprite
       sprite: Clothing/Back/Duffels/hydroponics.rsi
-
 - type: entity
   parent: ClothingBackpackDuffel
   id: ClothingBackpackDuffelCargo
@@ -197,8 +197,7 @@
   description: A large duffel bag for stealing cargo's precious loot.
   components:
     - type: Sprite
-      sprite: Clothing/Back/Duffels/cargo.rsi
-
+      sprite: _Goobstation/Clothing/Back/Duffels/cargo.rsi # Goob
 - type: entity
   parent: ClothingBackpackDuffel
   id: ClothingBackpackDuffelSalvage
@@ -209,7 +208,7 @@
       sprite: Clothing/Back/Duffels/salvage.rsi
 
 - type: entity
-  parent: [ClothingBackpackDuffel, BaseSyndicateContraband]
+  parent: [ClothingBackpackDuffel] # CorvaxGoob-Contraband : deleted contra label
   id: ClothingBackpackDuffelSyndicate
   name: syndicate duffel bag
   description: A large duffel bag for holding various traitor goods.
@@ -223,8 +222,16 @@
     - 0,0,8,4
 
 - type: entity
-  parent: ClothingBackpackDuffelSyndicate
+  parent: [ ClothingBackpackDuffelSyndicate ] # CorvaxGoob-Contraband : deleted contra label
   id: ClothingBackpackDuffelSyndicateBundle
+  abstract: true
+  components:
+  - type: Tag
+    tags: [] # ignore "WhitelistChameleon" tag
+
+- type: entity
+  parent: ClothingBackpackDuffel
+  id: ClothingBackpackDuffelBundle
   abstract: true
   components:
   - type: Tag
@@ -288,7 +295,7 @@
   - type: Storage
     maxItemSize: Huge
     grid:
-    - 0,0,19,9
+    - 0,0,14,5 #Goob
   - type: ClothingSpeedModifier
     sprintModifier: 1 # makes its stats identical to other variants of bag of holding
   - type: HeldSpeedModifier

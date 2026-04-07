@@ -72,11 +72,21 @@
   - !type:RoleTimeRequirement
     role: JobSecurityOfficer
     time: 18000 #5 hrs
+  - !type:SpeciesRequirement # CorvaxGoob-Species
+    inverted: true
+    species:
+    - Abductor
   startingGear: DetectiveGear
   icon: "JobIconDetective"
   supervisors: job-supervisors-hos
   canBeAntag: false
   #goobcoins: 30 #Goob content Corvax-Goob-coins
+  skills: # CorvaxGoob-Skills
+  - Shooting
+  guides: # goobstation
+  - Forensics
+  - Security
+  # - Detective SOP Hidden by CorvaxGoob
   access:
   - Security
   - Brig
@@ -91,9 +101,6 @@
   - !type:AddComponentSpecial # goobstation
     components:
       - type: SecurityStaff
-      - type: Skills # CorvaxGoob-Skills
-        skills:
-        - Shooting
 
 - type: startingGear
   id: DetectiveGear

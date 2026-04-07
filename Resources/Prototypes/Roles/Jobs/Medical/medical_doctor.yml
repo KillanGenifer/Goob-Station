@@ -85,6 +85,13 @@
   icon: "JobIconMedicalDoctor"
   supervisors: job-supervisors-cmo
   #goobcoins: 20 #Goob content Corvax-Goob-coins
+  skills: # CorvaxGoob-Skills
+  - Surgery
+  - MedicalEquipment
+  guides: # goobstation
+  - MedicalDoctor
+  - Medical
+  - Medicine
   access:
   - Medical
   - Maintenance
@@ -99,11 +106,6 @@
     components:
     - type: SurgerySpeedModifier
       speedModifier: 1.5
-    - type: Skills # CorvaxGoob-Skills
-      skills:
-      - Surgery
-      - MedicalEquipment
-
 
 - type: startingGear
   id: DoctorGear

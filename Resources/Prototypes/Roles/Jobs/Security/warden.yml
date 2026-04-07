@@ -138,19 +138,34 @@
     - !type:RoleTimeRequirement
       role: JobSecurityOfficer
       time: 18000 #5 hrs
+    - !type:RoleTimeRequirement
+      role: JobBrigmedic
+      time: 18000 #5 hrs
     - !type:DepartmentTimeRequirement
       department: Security
-      time: 36000 #10 hrs
+      time: 36000 # 10 hrs
     - !type:SpeciesRequirement # Goob - None Felinid
       inverted: true
       species:
       - Felinid
+    - !type:SpeciesRequirement # CorvaxGoob-Species
+      inverted: true
+      species:
+      - Abductor
   weight: 5
   startingGear: WardenGear
   icon: "JobIconWarden"
   supervisors: job-supervisors-hos
   canBeAntag: false
   #goobcoins: 35 #Goob content Corvax-Goob-coins
+  skills: # CorvaxGoob-Skills
+  - Shooting
+  guides: # goobstation
+  # - SpaceLaw Hidden by CorvaxGoob
+  # - Legal SOP Hidden by CorvaxGoob
+  - Security
+  # - Warden SOP Hidden by CorvaxGoob
+  - KravMaga
   access:
   - Security
   - Brig
@@ -166,14 +181,11 @@
   - !type:AddComponentSpecial # goobstation
     components:
       - type: SecurityStaff
-      - type: Skills # CorvaxGoob-Skills
-        skills:
-        - Shooting
 
 - type: startingGear
   id: WardenGear
   equipment:
-    eyes: ClothingEyesGlassesSecurity
+    eyes: ClothingEyesGlassesSecurityContraDetect # Goobstation
     id: WardenPDA
     ears: ClothingHeadsetAltWarden # Goobstation
     pocket1: WeaponPistolMk58

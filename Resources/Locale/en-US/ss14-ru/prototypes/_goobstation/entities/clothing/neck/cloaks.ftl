@@ -1,4 +1,4 @@
-ent-ClothingNeckCloakHelldiver = salvage pure loality cape
+ent-ClothingNeckCloakHelldiver = salvage pure loyality cape
     .desc = A representation of the thankfulness of those infinite crew whose wealthy existence we strive to ensure.
 ent-ClothingNeckCloakResonant = resonant cape
     .desc = The stage calls for us. We should gladly play along.
@@ -8,3 +8,9 @@ ent-ClothingNeckCloakCarpAlt = carp cloak
     .desc = Restricted to extraterrestrial entities. That means NOT you.
 ent-ClothingNeckCloakSanabi = brigadier general cloak
     .desc = A tattered, yet imposing cloak, worn by elite warriors.
+ent-ClothingNeckCloakVetCap = Veteran Captain's cloak
+    .desc = Captains Aura Cloak
+ent-ClothingNeckCloakOuterCommand = outer command cloak
+    .desc = A stylish purple cloak with Terra-Gov insignia.
+ent-ClothingNeckCloakInquisitor = inquisitor cloak
+    .desc = A bulky cloak decorated with sacred writings and the symbol of the Inquisition.

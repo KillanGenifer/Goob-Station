@@ -73,9 +73,16 @@
   requirements:
     - !type:OverallPlaytimeRequirement
       time: 9000 # 2.5 hrs
+    - !type:SpeciesRequirement # CorvaxGoob-Species
+      inverted: true
+      species:
+      - Abductor
   startingGear: LawyerGear
   icon: "JobIconLawyer"
   supervisors: job-supervisors-hop
+  # guides: # goobstation Hidden by CorvaxGoob
+  # - SpaceLaw
+  # - Legal SOP
   #goobcoins: 10 #Goob content Corvax-Goob-coins
   access:
   - Service
@@ -93,7 +100,7 @@
   equipment:
     shoes: ClothingShoesBootsLaceup
     id: LawyerPDA
-    ears: ClothingHeadsetSecurity
+    ears: ClothingHeadsetLawyer # CorvaxGoob: ClothingHeadsetSecurity > ClothingHeadsetLawyer
   inhand:
     - BriefcaseBrownFilled
   storage:
@@ -111,3 +118,4 @@
     neck: ClothingNeckLawyerbadge
     outerClothing: ClothingOuterWinterColorBlack
     gloves: ClothingHandsGlovesColorBlack
+    ears: ClothingHeadsetLawyer # CorvaxGoob

@@ -222,10 +222,9 @@
   name: cargo winter boots
   components:
   - type: Sprite
-    sprite: Clothing/Shoes/Boots/winterbootscargo.rsi
+    sprite: _Goobstation/Clothing/Shoes/Boots/winterbootscargo.rsi # Goob
   - type: Clothing
-    sprite: Clothing/Shoes/Boots/winterbootscargo.rsi
-
+    sprite: _Goobstation/Clothing/Shoes/Boots/winterbootscargo.rsi # Goob
 - type: entity
   parent: ClothingShoesBaseWinterBoots
   id: ClothingShoesBootsWinterEngi
@@ -268,14 +267,14 @@
   - type: ItemSlots # Goobstation
     slots:
       item:
-        name: clothing-boots-sidearm
+        # name: clothing-boots-sidearm # CorvaxGoob-Loc-in-UI
         whitelist:
           tags:
           - Knife
           - Sidearm
 
 - type: entity
-  parent: [ClothingShoesBaseWinterBoots, BaseSyndicateContraband]
+  parent: [ClothingShoesBaseWinterBoots] # CorvaxGoob-Contraband : deleted contra label
   id: ClothingShoesBootsWinterSyndicate
   name: syndicate's winter boots
   description: Durable heavy boots, looks like merch from "Syndieland".

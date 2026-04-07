@@ -139,7 +139,7 @@
   requirements:
   - !type:RoleTimeRequirement
     role: JobScientist
-    time: 18000 #5 hrs
+    time: 21600 #6 hrs
   - !type:DepartmentTimeRequirement
     department: Science
     time: 36000 #10 hrs
@@ -147,12 +147,25 @@
     inverted: true
     species:
     - Felinid
+  - !type:SpeciesRequirement # CorvaxGoob-Species
+    inverted: true
+    species:
+    - Abductor
   weight: 10
   startingGear: ResearchDirectorGear
   icon: "JobIconResearchDirector"
   supervisors: job-supervisors-captain
   canBeAntag: false
   #goobcoins: 40 #Goob content Corvax-Goob-coins
+  skills: # CorvaxGoob-Skills
+  - AdvancedBuilding
+  #canBeAntag: false
+  antagAdvantage: 75 # Goobstation
+  guides: # goobstation
+  - Science
+  - Command
+  # - ResearchDirector SOP Hidden by CorvaxGoob
+  # - Science SOP Hidden by CorvaxGoob
   access:
   - Research
   - Command
@@ -160,16 +173,13 @@
   - ResearchDirector
   - Brig
   - Cryogenics
-  - External # goobstation
+  - External # Goobstation
   special:
   - !type:AddImplantSpecial
     implants: [ MindShieldImplant ]
   - !type:AddComponentSpecial
     components:
       - type: CommandStaff
-      - type: Skills # CorvaxGoob-Skills
-        skills:
-        - AdvancedBuilding
 
 - type: startingGear
   id: ResearchDirectorGear

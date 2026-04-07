@@ -89,7 +89,7 @@
       animation: WeaponArcSmash
       damage:
         types:
-          Piercing: 5
+          Blunt: 8
     - type: DamageStateVisuals
       states:
         Alive:
@@ -139,7 +139,7 @@
     - type: ZombieImmune
     - type: Damageable
       damageContainer: Blob
-      damageModifierSet: BlobMob
+      damageModifierSet: BlobBlobbernaut
     - type: Tag
       tags:
         - Blobbernaut
@@ -237,6 +237,10 @@
     - type: GuideHelp
       guides:
       - Blob
+    - type: Bloodstream
+      bloodMaxVolume: 300
+      bloodReagent: Blood
+      bleedReductionAmount: 5
 
 # Observer
 - type: entity
@@ -266,7 +270,7 @@
       showInHands: true
     - type: BlobObserver
     - type: Visibility
-      layer: 2
+      layer: 2 # Ghost visflag
     - type: ContentEye
     - type: MindContainer
     - type: Clickable
@@ -279,10 +283,7 @@
       description: ghost-role-information-blob-description
       rules: You are an antagonist, destroy the station!
       mindRoles:
-      - MindRoleGhostRoleSoloAntagonist
-      requirements:
-      - !type:OverallPlaytimeRequirement
-        time: 18000 #5 hours
+      - MindRoleGhostRoleSoloAntagonistGoob
     - type: GhostTakeoverAvailable
     - type: Fixtures
       fixtures:

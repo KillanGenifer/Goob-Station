@@ -25,7 +25,7 @@ traitor-role-greeting =
     Вы - агент организации { $corporation } на задании [color = darkred]Синдиката.[/color].
     Ваши цели и кодовые слова перечислены в меню персонажа.
     Воспользуйтесь своим аплинком, чтобы приобрести всё необходимое для выполнения работы.
-    Смерть Nanotrasen!
+    Смерть NanoTrasen!
 traitor-role-codewords =
     Кодовые слова следующие: [color = lightgray]
     { $codewords }.[/color]
@@ -41,9 +41,13 @@ traitor-role-codewords-short =
 traitor-role-uplink-implant =
     Ваш имплант аплинк активирован, воспользуйтесь им из хотбара.
     Аплинк надежно защищён, пока кто-нибудь не извлечёт его из вашего тела.
+traitor-role-uplink-pen-code =
+    Прокрутите ручку на комбинацию [color = lightgray]{ $code }[/color], чтобы разблокировать аплинк.
+    Градусы обозначают углы поворота. Аплинк автоматически блокируется при закрытии.
 traitor-role-uplink-code-short = Ваш код аплинка: { $code }. Установите его в качестве рингтона КПК для доступа к аплинку.
 traitor-role-uplink-implant-short = Ваш аплинк был имплантирован. Воспользуйтесь им из хотбара.
-traitor-role-moreinfo = Find more information about your role in the character menu.
-traitor-role-nouplink = You do not have a syndicate uplink. Make it count.
-traitor-role-allegiances = Your allegiances:
-traitor-role-notes = Notes from your employer:
+traitor-role-moreinfo = Найдите больше информации о своей роли в меню персонажа.
+traitor-role-uplink-pen-code-short = Комбинация от Аплинка вашей ручки: { $code }. Прокрутите ручку для разблокировки. Блокируется при закрытии.
+traitor-role-nouplink = У вас нет аплинка Синдиката. Действуйте обдуманно.
+traitor-role-allegiances = Ваша приверженность:
+traitor-role-notes = Заметки от вашего нанимателя:

@@ -21,6 +21,7 @@ using Content.Goobstation.Shared.MartialArts.Events;
 using Content.Shared.Damage.Components;
 using Content.Shared.Mobs.Components;
 using Content.Shared.Weapons.Melee.Events;
+using Content.Shared.IdentityManagement; // CorvaxGoob-Localization
 
 namespace Content.Goobstation.Shared.MartialArts;
 
@@ -102,14 +103,14 @@ public abstract partial class SharedMartialArtsSystem
 
         args.Handled = true;
 
-        _popupSystem.PopupClient(Loc.GetString("krav-maga-ready", ("action", kravActionComp.Name)), ent, ent);
+        _popupSystem.PopupClient(Loc.GetString("krav-maga-ready", /*CorvaxGoob-Localization-start*/("user", Identity.Entity(ent, EntityManager)), ("action", Loc.GetString("ent-Action" + kravActionComp.Name.Replace(" ", "")).ToLowerInvariant())/*kravActionComp.Name -> Loc.GetString("ent-Action" + kravActionComp.Name.Replace(" ", "")).ToLowerInvariant() *//*CorvaxGoob-Localization-end*/), ent, ent);
         ent.Comp.SelectedMove = kravActionComp.Configuration;
         ent.Comp.SelectedMoveComp = kravActionComp;
     }
 
     private void OnMapInit(Entity<KravMagaComponent> ent, ref MapInitEvent args)
     {
-        if (HasComp<MartialArtsKnowledgeComponent>(ent) || HasComp<ChangelingIdentityComponent>(ent))
+        if (HasComp<MartialArtsKnowledgeComponent>(ent) || HasComp<ChangelingComponent>(ent))
             return;
 
         foreach (var actionId in ent.Comp.BaseKravMagaMoves)

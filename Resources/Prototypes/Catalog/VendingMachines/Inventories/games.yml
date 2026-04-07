@@ -31,8 +31,13 @@
     MysteryFigureBox: 2
     BooksBag: 3
     CardBoxBlack: 3 # GoobStation
+    PokerChipsBox: 1 # CorvaxGoob-Poker
     CarcBoxClassic: 1 # CorvaxGoob Spacessonne
+    BoxPlaysetEvacPod: 1 # Corvax-Goob-EvacPod
+    CardBoxKotahi: 3 # CorvaxGoob-kotahi
   contrabandInventory:
     Basketball: 1
     FoodSnackBoritos: 3
     DrinkSpaceMountainWindCan: 3
+  emaggedInventory: #Goob
+    CardBoxSyndicate: 1

@@ -6,4 +6,9 @@ ent-ClothingNeckCloakSyndicateAdmiral = плащ адмирала синдика
     .desc = Красный плащ, прошитый золотой тканью.
 ent-ClothingNeckWhiteMantleCaptain = белая мантия капитана
     .desc = Мантия капитана, с белым пухом.
-
+ent-ClothingNeckCloakCentcomBlack = плащ офицера специальных операций
+    .desc = Вышитый золотом логотип компании NanoTrasen говорит сам за себя.
+ent-ClothingNeckCloakCentcomAdmiral = плащ адмирала
+    .desc = Яркий зелёный плащ с золотым шитьём, который носят адмиралы флота NanoTrasen.
+ent-ClothingNeckCloakHosExperimental = экспериментальный плащ ГСБ
+    .desc = Экспериментальный плащ ГСБ, обеспечивающий стиль и внушительный вид носителю.

@@ -58,6 +58,7 @@
     - NailgunStatic
     - NailsStatic
     dynamicPacks:
+    - ConstructionBagOfHolding
     - AdvancedTools
     - AtmosTools
     - EngineeringWeapons
@@ -69,9 +70,13 @@
     - SharedBoards
     - CameraBoards
     - ShuttleBoards
+    - ShuttleBoardsGoob
     - BluespaceTheory
     - ScienceClothing
     - UpgradeKits
+    # CorvaxGoob Packs
+    - WorkBeltsSharedDynamic # WorkBelts-Techfab
+    - WokrBeltsEngDynamic # WorkBelts-Techfab
   - type: EmagLatheRecipes
     emagStaticPacks:
     - NailgunEvilStatic
@@ -133,8 +138,13 @@
     - CargoBoards
     - SharedBoards
     - ShuttleBoards
+    - ShuttleBoardsGoob
     - BluespaceTheory
     - ScienceClothing
+    - ConstructionBagOfHolding
+    # CorvaxGoob Packs
+    - WorkBeltsSharedDynamic # WorkBelts-Techfab
+    - WorkBeltsSalDynamic # WorkBelts-Techfab
   - type: EmagLatheRecipes
     emagStaticPacks:
     - SalvageExplosivesStatic # Seismic charges - they're pretty cheap in salvage vendor anyway so why not
@@ -209,14 +219,22 @@
     - SharedBoards
     - ScienceBoards
     - ShuttleBoards
+    - ShuttleBoardsGoob
     - MedicalBoardsGoob
     - BluespaceTheory
     - ExperimentalScienceGoob
     - MechBoardsScience
     - Pinpointers
+    - Genetics
+    - XenobioPack
+    - XenobagHoldingPack
     # Einstein Engines Packs
     - Translators
     - TranslatorImplanters
+    # CorvaxGoob Packs
+    - AdvancedRoboticsBoards # MutableLaws
+    - WorkBeltsSharedDynamic # WorkBelts-Techfab
+    - WokrBeltsSciDynamic # WorkBelts-Techfab
   - type: EmagLatheRecipes
     emagDynamicPacks:
     - MechBoardsSecurity
@@ -255,13 +273,16 @@
     runningState: icon
     staticPacks:
     - ServiceBoardsStatic
+    - ServiceBoardsStaticGoob
     - MaterialsStatic
     - LightsStatic
     - ServiceStatic
     - PowerCellsStatic
     - LatheMiscStatic
+    - HydroponicsStatic # CorvaxGoob
     - ChemistryStatic
     - TapeRecorderStatic
+    - CondimentStatic
     dynamicPacks:
     - Janitor
     - Instruments
@@ -274,8 +295,11 @@
     - SharedBoards
     - CameraBoards
     - ServiceTools
+    - ServiceBoardsGoob # goob
     # Einstein Engines Packs
     - Translators
+    # CorvaxGoob Packs
+    - WorkBeltsSerDynamic # WorkBelts-Techfab
   - type: EmagLatheRecipes
     emagStaticPacks:
     - ServiceBoardsEvilStatic # Donk Co microwave circiutboard
@@ -285,3 +309,40 @@
         - Sheet
         - RawMaterial
         - Ingot
+
+- type: entity
+  id: ERTTechFab
+  parent: [BaseLatheLube, BaseSiloUtilizer]
+  name: ERT techfab
+  description: Standard-issue ammunition and gear for Emergency Response Team deployments. Fast, basic, reliable.
+  components:
+    - type: Sprite
+      sprite: Structures/Machines/techfab.rsi
+      layers:
+        - state: icon
+          map: ["enum.LatheVisualLayers.IsRunning"]
+        - state: ert
+        - state: unlit
+          shader: unshaded
+          map: ["enum.PowerDeviceVisualLayers.Powered"]
+        - state: inserting
+          map: ["enum.MaterialStorageVisualLayers.Inserting"]
+        - state: panel
+          map: ["enum.WiresVisualLayers.MaintenancePanel"]
+    - type: Machine
+      board: ERTTechFabCircuitboard
+    - type: Lathe
+      idleState: icon
+      runningState: icon
+      staticPacks:
+      - SecurityAmmoStatic
+      - SecurityAmmoStaticGoob
+      - ERTAmmoStaticGoob
+      - SecurityHypoStatic
+      - SecurityEquipmentStaticGoob
+    - type: MaterialStorage
+      whitelist:
+        tags:
+          - Sheet
+          - RawMaterial
+          - Ingot

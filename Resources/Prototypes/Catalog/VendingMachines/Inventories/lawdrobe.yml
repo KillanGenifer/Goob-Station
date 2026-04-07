@@ -29,7 +29,7 @@
     ClothingUniformJumpsuitLawyerGood: 1
     ClothingUniformJumpskirtLawyerGood: 1
     ClothingShoesBootsLaceup: 2
-    ClothingHeadsetService: 2
+    ClothingHeadsetLawyer: 2 # CorvaxGoob: ClothingHeadsetService > ClothingHeadsetLawyer
     ClothingNeckLawyerbadge: 2
     BriefcaseBrown: 2
     BookSpaceLaw: 3
@@ -42,4 +42,4 @@
     SpaceCash100: 2
     ToyFigurineLawyer: 1
   emaggedInventory:
-    CyberPen: 1
+    CyberPen: 1 #Goob station

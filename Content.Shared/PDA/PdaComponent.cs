@@ -77,6 +77,7 @@ namespace Content.Shared.PDA
         public string? IdCard;
 
         [ViewVariables] public EntityUid? ContainedId;
+        [ViewVariables] public EntityUid? ContainedPen;//goob addition for pen
         [ViewVariables] public bool FlashlightOn;
 
         [ViewVariables(VVAccess.ReadWrite)] public string? OwnerName;
@@ -87,5 +88,6 @@ namespace Content.Shared.PDA
         [ViewVariables] public string? StationName;
         [ViewVariables] public string? StationAlertLevel;
         [ViewVariables] public Color StationAlertColor = Color.White;
+        [ViewVariables] public string? StationAlertInstructions; // CorvaxGoob-custom-alert-instructions-in-pda
     }
 }

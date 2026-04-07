@@ -52,6 +52,10 @@ using Robust.Server.Player;
 using Robust.Shared.Configuration;
 using Robust.Shared.Utility;
 using Content.Shared.Administration.Logs;
+using Content.Goobstation.Shared.ManifestListings;
+using Robust.Shared.Network; //Goobstation
+using Content.Shared.Roles; //Goobstation
+using Content.Server.Roles; //Goobstation
 
 namespace Content.Server.Objectives;
 
@@ -68,12 +72,12 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
     // [Dependency] private readonly ServerCurrencyManager _currencyMan = default!; Deleted by CorvaxGoob
     [Dependency] private readonly IConfigurationManager _cfg = default!;
     [Dependency] private readonly ISharedAdminLogManager _adminLog = default!;
+    [Dependency] private readonly SharedRoleSystem _roles = default!;
 
     private IEnumerable<string>? _objectives;
 
     private bool _showGreentext;
 
-    private int _goobcoinsPerGreentext = 5;
     private int _goobcoinsServerMultiplier = 1;
     public override void Initialize()
     {
@@ -84,7 +88,6 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
         Subs.CVar(_cfg, CCVars.GameShowGreentext, value => _showGreentext = value, true);
 
         _prototypeManager.PrototypesReloaded += CreateCompletions;
-        Subs.CVar(_cfg, GoobCVars.GoobcoinsPerGreentext, value => _goobcoinsPerGreentext = value, true);
         Subs.CVar(_cfg, GoobCVars.GoobcoinServerMultiplier, value => _goobcoinsServerMultiplier = value, true);
     }
 
@@ -113,7 +116,7 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
             if (info.Minds.Count == 0)
                 continue;
 
-            // first group the gamerules by their agents, for example 2 different dragons
+            // first group the gamerules by their factions, for example 2 different dragons
             var agent = info.Faction ?? info.AgentName;
             if (!summaries.ContainsKey(agent))
                 summaries[agent] = new Dictionary<string, Dictionary<string, List<(EntityUid, string)>>>();
@@ -154,10 +157,10 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
                 }
 
                 var result = new StringBuilder();
-                result.AppendLine(Loc.GetString("objectives-round-end-result", ("count", total), ("agent", agent)));
+                result.AppendLine(Loc.GetString("objectives-round-end-result", ("count", total), ("agent", faction)));
                 if (agent == Loc.GetString("traitor-round-end-agent-name"))
                 {
-                    result.AppendLine(Loc.GetString("objectives-round-end-result-in-custody", ("count", total), ("custody", totalInCustody), ("agent", agent)));
+                    result.AppendLine(Loc.GetString("objectives-round-end-result-in-custody", ("count", total), ("custody", totalInCustody), ("agent", faction)));
                 }
                 // next add all the players with its own prepended text
                 foreach (var (prepend, minds) in summary)
@@ -179,6 +182,7 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
     private void AddSummary(StringBuilder result, string agent, List<(EntityUid, string)> minds)
     {
         var agentSummaries = new List<(string summary, float successRate, int completedObjectives)>();
+        var currencyStorage = new Dictionary<NetUserId, float>(); //goobstation - store all currency and add at end off round
 
         foreach (var (mindId, name) in minds)
         {
@@ -188,6 +192,19 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
             var userid = mind.OriginalOwnerUserId;
             var title = GetTitle((mindId, mind), name);
             var custody = IsInCustody(mindId, mind) ? Loc.GetString("objectives-in-custody") : string.Empty;
+
+            // goobstation - traitor flavor
+            // TODO: the entirety of roundend methods are shitcode
+            // if we were to add changeling/heretic/bloodbrother/antag flavor
+            // (something like "Timmy Turner was the Ashbringer" or "Grey Maria was from Gami Hive")
+            // we'd need to make a type check on every mind role or raise a separate event for each game rule/role
+            // and i can't be assed to do it!
+            // regards
+            if (_roles.MindHasRole<TraitorRoleComponent>(mindId, out var traitorRole))
+            {
+                var issuer = traitorRole.Value.Comp2.ObjectiveIssuer.Replace(" ", "").ToLower();
+                agent = Loc.GetString($"traitor-{issuer}-roundend");
+            }
 
             var objectives = mind.Objectives;
             if (objectives.Count == 0)
@@ -200,6 +217,13 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
             var totalObjectives = 0;
             var agentSummary = new StringBuilder();
             agentSummary.AppendLine(Loc.GetString("objectives-with-objectives", ("custody", custody), ("title", title), ("agent", agent)));
+
+            // Goobstation start
+            var ev = new PrependObjectivesSummaryTextEvent();
+            RaiseLocalEvent(mindId, ref ev);
+            if (ev.Text != string.Empty)
+                agentSummary.AppendLine(ev.Text);
+            // Goobstation end
 
             foreach (var objectiveGroup in objectives.GroupBy(o => Comp<ObjectiveComponent>(o).LocIssuer))
             {
@@ -216,6 +240,8 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
 
                     var objectiveTitle = info.Value.Title;
                     var progress = info.Value.Progress;
+                    var reward = info.Value.ServerCurrency;
+                    var rewardPartial = info.Value.PartialCurrency;
                     totalObjectives++;
 
                     // Goob (even tho the entire file got massacred by John already)
@@ -248,6 +274,13 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
                         Easiest place to give people points for completing objectives lol
                         // if(userid.HasValue)
                             //_currencyMan.AddCurrency(userid.Value, _goobcoinsPerGreentext * _goobcoinsServerMultiplier);
+
+                        // Easiest place to give people points for completing objectives lol
+                        if (userid.HasValue)
+                            if (currencyStorage.ContainsKey(userid.Value))
+                                currencyStorage[userid.Value] += reward;
+                            else
+                                currencyStorage.Add(userid.Value, reward);
                         */
                     }
                     else if (progress <= 0.99f && progress >= 0.5f)
@@ -257,6 +290,12 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
                             ("objective", objectiveTitle),
                             ("progress", progress)
                         ));
+                        //Goobstation
+                        if (userid.HasValue && rewardPartial)
+                            if (currencyStorage.ContainsKey(userid.Value))
+                                currencyStorage[userid.Value] += reward * progress;
+                            else
+                                currencyStorage.Add(userid.Value, reward * progress);
                     }
                     else if (progress < 0.5f && progress > 0f)
                     {
@@ -288,6 +327,9 @@ public sealed class ObjectivesSystem : SharedObjectivesSystem
         {
             result.AppendLine(summary);
         }
+
+/*        foreach (var (key, currency) in currencyStorage)
+            _currencyMan.AddCurrency(key, (int)Math.Round( currency * _goobcoinsServerMultiplier));*/
     }
 
     public EntityUid? GetRandomObjective(EntityUid mindId, MindComponent mind, ProtoId<WeightedRandomPrototype> objectiveGroupProto, float maxDifficulty)

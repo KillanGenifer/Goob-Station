@@ -8,3 +8,7 @@ unfold-verb = Разложить
 fold-flip-verb = Перевернуть
 fold-zip-verb = Застегнуть
 fold-unzip-verb = Расстегнуть
+fold-showhair-verb = Показать волосы
+fold-hidehair-verb = Спрятать волосы
+fold-verb-clothing-jacket = Снять куртку
+unfold-verb-clothing-jacket = Надеть куртку

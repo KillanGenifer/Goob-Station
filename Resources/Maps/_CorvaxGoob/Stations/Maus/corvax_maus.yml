@@ -1,11 +1,11 @@
 meta:
   format: 7
   category: Map
-  engineVersion: 262.0.0
+  engineVersion: 264.0.0
   forkId: ""
   forkVersion: ""
-  time: 08/21/2025 18:59:31
-  entityCount: 19594
+  time: 12/26/2025 10:05:37
+  entityCount: 19580
 maps:
 - 1
 grids:
@@ -473,6 +473,11 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
+      dampingModifiers:
+        Cruise: 0.0075
+        Dampen: 0.25
+        Anchor: 2
+        None: 0.25
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
@@ -13167,6 +13172,7 @@ entities:
     - type: BecomesStation
       id: CorvaxMaus
     - type: ImplicitRoof
+    - type: FTLDrive
   - uid: 6882
     components:
     - type: MetaData
@@ -13230,6 +13236,11 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
+      dampingModifiers:
+        Cruise: 0.0075
+        Dampen: 0.25
+        Anchor: 2
+        None: 0.25
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
@@ -13334,6 +13345,7 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
+    - type: FTLDrive
   - uid: 17265
     components:
     - type: MetaData
@@ -13379,6 +13391,11 @@ entities:
     - type: OccluderTree
     - type: SpreaderGrid
     - type: Shuttle
+      dampingModifiers:
+        Cruise: 0.0075
+        Dampen: 0.25
+        Anchor: 2
+        None: 0.25
       dampingModifier: 0.25
     - type: GridPathfinding
     - type: Gravity
@@ -14763,6 +14780,7 @@ entities:
     - type: GasTileOverlay
     - type: RadiationGridResistance
     - type: ImplicitRoof
+    - type: FTLDrive
 - proto: AcousticGuitarInstrument
   entities:
   - uid: 3
@@ -14770,94 +14788,6 @@ entities:
     - type: Transform
       pos: -13.57374,-37.607513
       parent: 2
-- proto: ActionToggleInternals
-  entities:
-  - uid: 3683
-    components:
-    - type: Transform
-      parent: 3341
-  - uid: 4018
-    components:
-    - type: Transform
-      parent: 4007
-  - uid: 5472
-    components:
-    - type: Transform
-      parent: 277
-  - uid: 5477
-    components:
-    - type: Transform
-      parent: 5468
-  - uid: 5727
-    components:
-    - type: Transform
-      parent: 4920
-  - uid: 5940
-    components:
-    - type: Transform
-      parent: 2097
-  - uid: 6087
-    components:
-    - type: Transform
-      parent: 2098
-  - uid: 7240
-    components:
-    - type: Transform
-      parent: 3249
-  - uid: 10185
-    components:
-    - type: Transform
-      parent: 9970
-  - uid: 10338
-    components:
-    - type: Transform
-      parent: 9982
-  - uid: 10409
-    components:
-    - type: Transform
-      parent: 10379
-  - uid: 12199
-    components:
-    - type: Transform
-      parent: 15999
-  - uid: 15455
-    components:
-    - type: Transform
-      parent: 12004
-- proto: ActionToggleJetpack
-  entities:
-  - uid: 7239
-    components:
-    - type: Transform
-      parent: 3249
-  - uid: 10184
-    components:
-    - type: Transform
-      parent: 9970
-  - uid: 14442
-    components:
-    - type: Transform
-      parent: 12004
-- proto: ActionToggleLight
-  entities:
-  - uid: 5
-    components:
-    - type: Transform
-      parent: 4
-  - uid: 716
-    components:
-    - type: Transform
-      parent: 5934
-  - uid: 18252
-    components:
-    - type: Transform
-      parent: 18251
-- proto: ActionToggleMagboots
-  entities:
-  - uid: 5985
-    components:
-    - type: Transform
-      parent: 5995
 - proto: AirAlarm
   entities:
   - uid: 6
@@ -17204,7 +17134,7 @@ entities:
       pos: -43.5,-45.5
       parent: 2
     - type: Door
-      secondsUntilStateChange: -54884.17
+      secondsUntilStateChange: -55218.902
       state: Opening
     - type: DeviceLinkSource
       lastSignals:
@@ -49732,7 +49662,7 @@ entities:
   - uid: 2124
     components:
     - type: Transform
-      pos: -69.34042,-32.275467
+      pos: -68.7504,-32.330547
       parent: 2
 - proto: ChemistryBottlePax
   entities:
@@ -51581,20 +51511,6 @@ entities:
     - type: Transform
       pos: -19.49857,23.516098
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 716
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 716
-    - type: ActionsContainer
 - proto: ClothingHeadHatMagician
   entities:
   - uid: 20046
@@ -52599,12 +52515,6 @@ entities:
     - type: Transform
       pos: -83.47811,-27.436897
       parent: 2
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 5985
   - uid: 12314
     components:
     - type: Transform
@@ -54176,6 +54086,14 @@ entities:
     - type: Transform
       pos: -76.5,-44.5
       parent: 2
+- proto: ComputerVirology
+  entities:
+  - uid: 716
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -59.5,-38.5
+      parent: 2
 - proto: CondenserMachineCircuitBoard
   entities:
   - uid: 18663
@@ -55056,10 +54974,10 @@ entities:
       parent: 2
 - proto: CrewMonitoringServer
   entities:
-  - uid: 4069
+  - uid: 4018
     components:
     - type: Transform
-      pos: -86.5,-66.5
+      pos: -87.5,-66.5
       parent: 2
 - proto: Crowbar
   entities:
@@ -60206,27 +60124,11 @@ entities:
     - type: Transform
       pos: -60.67739,-16.375868
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 5940
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 5940
   - uid: 2098
     components:
     - type: Transform
       pos: -60.885513,-16.301537
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 6087
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 6087
   - uid: 2871
     components:
     - type: Transform
@@ -60238,14 +60140,6 @@ entities:
     - type: Transform
       pos: -60.597137,2.4941769
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 3683
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 3683
 - proto: Dresser
   entities:
   - uid: 5689
@@ -61626,14 +61520,6 @@ entities:
     - type: Transform
       pos: 7.2966156,3.4261322
       parent: 15964
-    - type: GasTank
-      toggleActionEntity: 12199
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 12199
 - proto: ExtinguisherCabinetFilled
   entities:
   - uid: 4799
@@ -65106,20 +64992,6 @@ entities:
       rot: 1.1344640137963142 rad
       pos: 8.704285,-4.765991
       parent: 17265
-    - type: HandheldLight
-      toggleActionEntity: 18252
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 18252
-    - type: ActionsContainer
 - proto: FlippoEngravedLighter
   entities:
   - uid: 20010
@@ -89585,19 +89457,8 @@ entities:
     components:
     - type: Transform
       parent: 9914
-    - type: GasTank
-      toggleActionEntity: 15455
-    - type: Jetpack
-      toggleActionEntity: 14442
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 14442
-          - 15455
     - type: InsideEntityStorage
 - proto: JetpackMini
   entities:
@@ -89634,36 +89495,14 @@ entities:
     - type: Transform
       pos: -80.43065,-27.481495
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 10185
-    - type: Jetpack
-      toggleActionEntity: 10184
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 10184
-          - 10185
 - proto: JetpackVoidFilled
   entities:
   - uid: 3249
     components:
     - type: Transform
       parent: 11189
-    - type: GasTank
-      toggleActionEntity: 7240
-    - type: Jetpack
-      toggleActionEntity: 7239
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 7239
-          - 7240
     - type: InsideEntityStorage
 - proto: Jug
   entities:
@@ -89856,22 +89695,6 @@ entities:
     - type: Transform
       pos: -16.645802,-39.263855
       parent: 2
-    - type: HandheldLight
-      toggleActionEntity: 5
-    - type: ContainerContainer
-      containers:
-        cell_slot: !type:ContainerSlot
-          showEnts: False
-          occludes: True
-          ent: null
-        actions: !type:Container
-          showEnts: False
-          occludes: True
-          ents:
-          - 5
-    - type: Physics
-      canCollide: True
-    - type: ActionsContainer
 - proto: LampGold
   entities:
   - uid: 9991
@@ -91729,12 +91552,12 @@ entities:
     - type: Transform
       pos: 5.5,3.5
       parent: 17265
-- proto: MagazineBoxAntiMateriel
+- proto: MagazineLargeCaliber
   entities:
-  - uid: 384
+  - uid: 6053
     components:
     - type: Transform
-      pos: -14.217636,-3.5208688
+      pos: -14.312933,-3.3701582
       parent: 2
 - proto: MagazinePistolSubMachineGun
   entities:
@@ -92745,7 +92568,7 @@ entities:
   - uid: 5366
     components:
     - type: Transform
-      pos: -59.172874,-38.412975
+      pos: -58.769733,-38.21166
       parent: 2
   - uid: 10107
     components:
@@ -92757,7 +92580,7 @@ entities:
   - uid: 4031
     components:
     - type: Transform
-      pos: -59.614944,-38.42461
+      pos: -58.75982,-38.489162
       parent: 2
   - uid: 10108
     components:
@@ -92854,7 +92677,7 @@ entities:
   - uid: 5741
     components:
     - type: Transform
-      pos: -58.78898,-38.412975
+      pos: -58.373154,-38.618004
       parent: 2
   - uid: 10115
     components:
@@ -93574,43 +93397,19 @@ entities:
     components:
     - type: Transform
       parent: 6737
-    - type: GasTank
-      toggleActionEntity: 5472
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 5472
   - uid: 4007
     components:
     - type: Transform
       parent: 19928
-    - type: GasTank
-      toggleActionEntity: 4018
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 4018
   - uid: 5468
     components:
     - type: Transform
       pos: -80.34561,-30.474957
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 5477
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 5477
   - uid: 5714
     components:
     - type: Transform
@@ -93620,16 +93419,8 @@ entities:
     components:
     - type: Transform
       parent: 10376
-    - type: GasTank
-      toggleActionEntity: 10409
     - type: Physics
       canCollide: False
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 10409
     - type: InsideEntityStorage
 - proto: PaintingAmogusTriptych
   entities:
@@ -95083,28 +94874,12 @@ entities:
     - type: Transform
       pos: -69.33881,-7.2971864
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 5727
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 5727
   - uid: 9982
     components:
     - type: Transform
       rot: -1.1693705988362009 rad
       pos: -66.068375,-6.7322707
       parent: 2
-    - type: GasTank
-      toggleActionEntity: 10338
-    - type: ActionsContainer
-    - type: ContainerContainer
-      containers:
-        actions: !type:Container
-          ents:
-          - 10338
 - proto: PlasmaWindoorSecureSecurityLocked
   entities:
   - uid: 4718
@@ -104222,7 +103997,7 @@ entities:
   - uid: 10039
     components:
     - type: Transform
-      pos: -69.30553,-32.54311
+      pos: -68.631424,-32.578316
       parent: 2
 - proto: ScalpelShiv
   entities:
@@ -109926,6 +109701,13 @@ entities:
     - type: Transform
       pos: -68.5,-17.5
       parent: 2
+- proto: SpawnPointVirologist
+  entities:
+  - uid: 3683
+    components:
+    - type: Transform
+      pos: -59.5,-37.5
+      parent: 2
 - proto: SpawnPointWarden
   entities:
   - uid: 5997
@@ -113521,12 +113303,6 @@ entities:
       rot: -1.5707963267948966 rad
       pos: -61.5,-27.5
       parent: 2
-  - uid: 7492
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -59.5,-38.5
-      parent: 2
   - uid: 7921
     components:
     - type: Transform
@@ -115489,6 +115265,13 @@ entities:
     components:
     - type: Transform
       pos: -42.5,0.5
+      parent: 2
+- proto: VirologyServer
+  entities:
+  - uid: 5
+    components:
+    - type: Transform
+      pos: -85.5,-66.5
       parent: 2
 - proto: WallClock
   entities:
@@ -132495,13 +132278,6 @@ entities:
     - type: Transform
       pos: -12.669572,-1.101347
       parent: 2
-- proto: WeaponSniperHristov
-  entities:
-  - uid: 10308
-    components:
-    - type: Transform
-      pos: -14.564501,-3.3821173
-      parent: 2
 - proto: WeaponSniperMosin
   entities:
   - uid: 18896
@@ -132516,6 +132292,13 @@ entities:
     - AmmoCounter
     - BallisticAmmoProvider
     - Contraband
+- proto: WeaponSniperUncleStyopa
+  entities:
+  - uid: 384
+    components:
+    - type: Transform
+      pos: -14.595496,-3.3701582
+      parent: 2
 - proto: WeaponSubMachineGunDrozd
   entities:
   - uid: 17072
@@ -132866,6 +132649,18 @@ entities:
       parent: 2
 - proto: WindoorSecureCommandLocked
   entities:
+  - uid: 5940
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -87.5,-66.5
+      parent: 2
+  - uid: 5985
+    components:
+    - type: Transform
+      rot: 3.141592653589793 rad
+      pos: -85.5,-66.5
+      parent: 2
   - uid: 12110
     components:
     - type: Transform
@@ -133509,6 +133304,12 @@ entities:
     - type: Transform
       pos: -68.5,-29.5
       parent: 2
+  - uid: 4069
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -84.5,-66.5
+      parent: 2
   - uid: 4711
     components:
     - type: Transform
@@ -133542,6 +133343,18 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -34.5,-25.5
       parent: 2
+  - uid: 5472
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -88.5,-66.5
+      parent: 2
+  - uid: 5477
+    components:
+    - type: Transform
+      rot: -1.5707963267948966 rad
+      pos: -86.5,-66.5
+      parent: 2
   - uid: 5679
     components:
     - type: Transform
@@ -133565,6 +133378,12 @@ entities:
       rot: 1.5707963267948966 rad
       pos: -67.5,-64.5
       parent: 2
+  - uid: 5727
+    components:
+    - type: Transform
+      rot: 1.5707963267948966 rad
+      pos: -86.5,-66.5
+      parent: 2
   - uid: 5890
     components:
     - type: Transform
@@ -133576,18 +133395,6 @@ entities:
     - type: Transform
       rot: -1.5707963267948966 rad
       pos: -55.5,-25.5
-      parent: 2
-  - uid: 6857
-    components:
-    - type: Transform
-      rot: 1.5707963267948966 rad
-      pos: -87.5,-66.5
-      parent: 2
-  - uid: 6858
-    components:
-    - type: Transform
-      rot: -1.5707963267948966 rad
-      pos: -85.5,-66.5
       parent: 2
   - uid: 6862
     components:

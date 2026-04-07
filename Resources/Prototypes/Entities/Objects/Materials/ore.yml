@@ -69,17 +69,12 @@
   components:
   - type: Stack
     stackType: GoldOre
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: gold
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RawGold: 200 # Goobstation - was 100 # Corvax-Goob-OreSmeltingRebalance
+      RawGold: 500 # Goobstation - was 100 
   - type: Extractable
     grindableSolutionName: goldore
   - type: SolutionContainerManager
@@ -111,11 +106,6 @@
   components:
   - type: Stack
     stackType: DiamondOre
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: diamond
   - type: Material
@@ -149,17 +139,12 @@
   components:
   - type: Stack
     stackType: SteelOre
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: iron
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RawIron: 200 # Goobstation - was 100 # Corvax-Goob-OreSmeltingRebalance
+      RawIron: 300 # Goobstation - was 100 
   - type: Extractable
     grindableSolutionName: ironore
   - type: SolutionContainerManager
@@ -187,17 +172,12 @@
   components:
   - type: Stack
     stackType: PlasmaOre
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: plasma
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RawPlasma: 200 # Goobstation - was 100 # Corvax-Goob-OreSmeltingRebalance
+      RawPlasma: 500 # Goobstation - was 100 
   - type: PointLight
     radius: 1.2
     energy: 0.6
@@ -234,17 +214,12 @@
   components:
   - type: Stack
     stackType: SilverOre
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: silver
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RawSilver: 200 # Goobstation - was 100 # Corvax-Goob-OreSmeltingRebalance
+      RawSilver: 500 # Goobstation - was 100 
   - type: Extractable
     grindableSolutionName: silverore
   - type: SolutionContainerManager
@@ -276,17 +251,12 @@
   components:
   - type: Stack
     stackType: SpaceQuartz
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: spacequartz
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RawQuartz: 200 # Goobstation - was 100 # Corvax-Goob-OreSmeltingRebalance
+      RawQuartz: 300 # Goobstation - was 100 
   - type: Extractable
     grindableSolutionName: quartzore
   - type: SolutionContainerManager
@@ -314,17 +284,12 @@
   components:
   - type: Stack
     stackType: UraniumOre
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: uranium
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RawUranium: 200 # Goobstation - was 100 # Corvax-Goob-OreSmeltingRebalance
+      RawUranium: 500 # Goobstation - was 100 
   - type: PointLight
     radius: 1.2
     energy: 0.8
@@ -364,17 +329,12 @@
   components:
   - type: Stack
     stackType: BananiumOre
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: bananium
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RawBananium: 200 # Goobstation - was 100 # Corvax-Goob-OreSmeltingRebalance
+      RawBananium: 300 # Goobstation - was 100 
   - type: PointLight
     radius: 1.2
     energy: 1
@@ -415,11 +375,6 @@
   components:
   - type: Stack
     stackType: Coal
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: coal
   - type: Material
@@ -441,7 +396,7 @@
           Quantity: 0.1
   - type: PhysicalComposition
     materialComposition:
-      Coal: 200 # Goobstation - was 100 # Corvax-Goob-OreSmeltingRebalance
+      Coal: 300 # Goobstation - was 100 
   - type: Item
     heldPrefix: coal
 
@@ -485,17 +440,12 @@
   components:
   - type: Stack
     stackType: SaltOre
-  # Goobstation - Custom stack splitting dialog
-  - type: UserInterface
-    interfaces:
-      enum.StackCustomSplitUiKey.Key:
-        type: StackCustomSplitBoundUserInterface
   - type: Sprite
     state: salt
   - type: Material
   - type: PhysicalComposition
     materialComposition:
-      RawSalt: 200 # Goobstation - was 100 # Corvax-Goob-OreSmeltingRebalance
+      RawSalt: 300 # Goobstation - was 100 # Corvax-Goob-OreSmeltingRebalance
   - type: Extractable
     grindableSolutionName: saltore
   - type: SolutionContainerManager
@@ -508,6 +458,12 @@
           Quantity: 5
   - type: Item
     heldPrefix: salt
+  - type: StatusEffectOnCollideGhost # Goobstation
+    whitelist:
+      tags:
+      - WeakToSalt
+    statusEffect: Corporeal
+    duration: 15
 
 - type: entity
   parent: SaltOre

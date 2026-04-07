@@ -8,3 +8,7 @@ ent-StasisOperatingTableCircuitboard = stasis operating table board
     .desc = A machine board for a stasis operating table.
 ent-MachineMedipenRefillerCircuitboard = medipen refiller board
     .desc = A machine board for a medipen refiller
+ent-QuantumTelepadMachineCircuitboard = quantum telepad machine board
+    .desc = A machine printed circuit board for a quantum telepad.
+ent-CivilianFlatpackerMachineCircuitboard = civilian flatpacker board
+    .desc = A machine printed circuit board for a civilian flatpacker.

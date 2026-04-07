@@ -33,6 +33,7 @@
 
 using Content.Server.Ghost.Roles.Raffles;
 using Content.Server.Mind.Commands;
+using Content.Shared._CorvaxGoob.Skills;
 using Content.Shared.Roles;
 using Robust.Shared.Prototypes;
 
@@ -47,12 +48,6 @@ public sealed partial class GhostRoleComponent : Component
     [DataField("description")] private string _roleDescription = "Unknown";
 
     [DataField("rules")] private string _roleRules = "ghost-role-component-default-rules";
-
-    // Actually make use of / enforce this requirement?
-    // Why is this even here.
-    // Move to ghost role prototype & respect CCvars.GameRoleTimerOverride
-    [DataField("requirements")]
-    public HashSet<JobRequirement>? Requirements;
 
     /// <summary>
     /// Whether the <see cref="MakeSentientCommand"/> should run on the mob.
@@ -143,5 +138,13 @@ public sealed partial class GhostRoleComponent : Component
     [DataField("job")]
     [Access(typeof(GhostRoleSystem), Other = AccessPermissions.ReadWriteExecute)] // also FIXME Friends
     public ProtoId<JobPrototype>? JobProto = null;
+
+    // CorvaxGoob-Skills-Start
+    /// <summary>
+    /// Skills that will be given on joining ghostrole.
+    /// </summary>
+    [DataField("skills")]
+    public HashSet<Skills> Skills = [];
+    // CorvaxGoob-Skills-End
 }
 

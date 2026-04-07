@@ -145,8 +145,10 @@
     solution: hypospray
   - type: ExaminableSolution
     solution: hypospray
+    exactVolume: true
   - type: Hypospray
     onlyAffectsMobs: false
+    otherDelay: 0.25 # CorvaxGoob-Changes
   - type: UseDelay
     delay: 0.5
   - type: StaticPrice
@@ -186,8 +188,10 @@
     solution: hypospray
   - type: ExaminableSolution
     solution: hypospray
+    exactVolume: true
   - type: Hypospray
     onlyAffectsMobs: false
+    otherDelay: 0.25 # CorvaxGoob-Changes
   - type: UseDelay
     delay: 0.25
   - type: Appearance
@@ -265,11 +269,13 @@
         maxVol: 20 # Goobstation
   - type: ExaminableSolution
     solution: pen
+    exactVolume: true
   - type: Hypospray
     solutionName: pen
     transferAmount: 20 # Goobstation
     onlyAffectsMobs: false
     injectOnly: true
+    otherDelay: 0.25 # CorvaxGoob-Changes
   - type: Appearance
   - type: SolutionContainerVisuals
     maxFillLevels: 1
@@ -305,13 +311,13 @@
   - type: SolutionContainerManager
     solutions:
       pen:
-        maxVol: 20 # goobstation
+        maxVol: 15 # Goobstation
         reagents:
-        - ReagentId: Dexalin # Goobstation
-          Quantity: 10
-        - ReagentId: Ibuprofen # Goobstation
+        - ReagentId: Epinephrine # Goobstation
           Quantity: 5
-        - ReagentId: Omnizine # Goobstation
+        - ReagentId: Atropine # Goobstation
+          Quantity: 5
+        - ReagentId: TranexamicAcid # Goobstation
           Quantity: 5
   - type: Tag
     tags:
@@ -653,9 +659,9 @@
         maxVol: 30
         reagents:
           - ReagentId: Leporazine
-            Quantity: 10
+            Quantity: 15 #goob, was 10
           - ReagentId: Barozine
-            Quantity: 20
+            Quantity: 15 #goob, was 20, changed due to barozine metabolizing slower now, lasts a minute
   - type: Tag
     tags:
     - Medipen
@@ -805,8 +811,13 @@
   - type: ExaminableSolution
     solution: hypospray
     heldOnly: true # Allow examination only when held in hand.
+    exactVolume: true
   - type: Hypospray
     onlyAffectsMobs: false
+    # CorvaxGoob-Changes-Start
+    hideDoAfter: true
+    otherDelay: 0.25
+    # CorvaxGoob-Changes-End
   - type: UseDelay
     delay: 0.5
   - type: StaticPrice # A new shitcurity meta

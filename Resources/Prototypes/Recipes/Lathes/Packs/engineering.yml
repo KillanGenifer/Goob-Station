@@ -22,10 +22,11 @@
   - NetworkConfigurator
   - Signaller
   - SprayPainter
+  - SprayPainterAmmo
   - FlashlightLantern
   - HandheldGPSBasic
   - TRayScanner
-  - UtilityBelt
+  # - UtilityBelt # CorvaxGoob-WorkBelts-Techfab
   - ClothingOuterVestTank
   - HandheldStationMap
   - ClothingHeadHatWelding
@@ -56,11 +57,13 @@
   - CellRechargerCircuitboard
   - WeaponCapacitorRechargerCircuitboard
   - FreezerElectronics
+  - CameraElectronics # goob
 
 - type: latheRecipePack
   id: EngineeringBoardsStatic
   recipes:
   - SpaceHeaterMachineCircuitBoard
+  - CondenserMachineCircuitBoard # Goob
 
 ## Dynamic
 
