@@ -23,9 +23,9 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
         SubscribeLocalEvent<AnimatedEmotesComponent, EmoteEvent>(OnEmote);
     }
 
-    private void OnEmote(EntityUid uid, AnimatedEmotesComponent component, ref EmoteEvent args)
+    private void OnEmote(Entity<AnimatedEmotesComponent> ent, ref EmoteEvent args)
     {
-        PlayEmoteAnimation(uid, component, args.Emote.ID);
+        PlayEmoteAnimation(ent, args.Emote.ID);
 
         if (args.Emote.TargetEvents is not null) // CorvaxGoob-PrototypedAnimations : Raise to play client prototyped animation if it's exist
             foreach (var targetEvent in args.Emote.TargetEvents)
@@ -35,9 +35,12 @@ public sealed partial class AnimatedEmotesSystem : SharedAnimatedEmotesSystem
             }
     }
 
-    public void PlayEmoteAnimation(EntityUid uid, AnimatedEmotesComponent component, ProtoId<EmotePrototype> prot)
+    public void PlayEmoteAnimation(Entity<AnimatedEmotesComponent> ent, ProtoId<EmotePrototype> prot)
     {
-        component.Emote = prot;
-        Dirty(uid, component);
+        ent.Comp.Emote = prot;
+        Dirty(ent);
+
+        if (prot == "Flip")
+            ApplyFlipEffects(ent);
     }
 }
