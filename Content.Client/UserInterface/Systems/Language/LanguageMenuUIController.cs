@@ -17,7 +17,9 @@ namespace Content.Client.UserInterface.Systems.Language;
 public sealed class LanguageMenuUIController : UIController, IOnStateEntered<GameplayState>, IOnStateExited<GameplayState>
 {
     public LanguageMenuWindow? LanguageWindow;
-    private MenuButton? LanguageButton => UIManager.GetActiveUIWidgetOrNull<MenuBar.Widgets.GameTopMenuBar>()?.LanguageButton;
+
+    // Optional: not every HUD layout has a dedicated language button.
+    private MenuButton? LanguageButton => null;
 
     public void OnStateEntered(GameplayState state)
     {

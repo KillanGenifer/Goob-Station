@@ -9,9 +9,9 @@ using Content.Client.UserInterface.Systems.Emotes;
 using Content.Client.UserInterface.Systems.EscapeMenu;
 using Content.Client.UserInterface.Systems.Gameplay;
 using Content.Client.UserInterface.Systems.Guidebook;
+using Content.Client._CorvaxGoob.Intentions.UI;
 using Content.Client.UserInterface.Systems.MenuBar.Widgets;
 using Content.Client.UserInterface.Systems.Sandbox;
-using Content.Client.UserInterface.Systems.Language;
 using Robust.Client.UserInterface.Controllers;
 
 namespace Content.Client.UserInterface.Systems.MenuBar;
@@ -21,13 +21,14 @@ public sealed class GameTopMenuBarUIController : UIController
     [Dependency] private readonly EscapeUIController _escape = default!;
     [Dependency] private readonly AdminUIController _admin = default!;
     [Dependency] private readonly CharacterUIController _character = default!;
+    [Dependency] private readonly IntentionsUIController _intentions = default!;
     [Dependency] private readonly CraftingUIController _crafting = default!;
     [Dependency] private readonly AHelpUIController _ahelp = default!;
     [Dependency] private readonly ActionUIController _action = default!;
     [Dependency] private readonly SandboxUIController _sandbox = default!;
     [Dependency] private readonly GuidebookUIController _guidebook = default!;
     [Dependency] private readonly EmotesUIController _emotes = default!;
-    [Dependency] private readonly LanguageMenuUIController _language = default!; // Goob
+    //[Dependency] private readonly LanguageMenuUIController _language = default!; // Goob
 
     private GameTopMenuBar? GameTopMenuBar => UIManager.GetActiveUIWidgetOrNull<GameTopMenuBar>();
 
@@ -46,12 +47,13 @@ public sealed class GameTopMenuBarUIController : UIController
         _guidebook.UnloadButton();
         _admin.UnloadButton();
         _character.UnloadButton();
+        _intentions.UnloadButton();
         _crafting.UnloadButton();
         _ahelp.UnloadButton();
         _action.UnloadButton();
         _sandbox.UnloadButton();
         _emotes.UnloadButton();
-        _language.UnloadButton(); // Goob
+        //_language.UnloadButton(); // Goob
     }
 
     public void LoadButtons()
@@ -60,11 +62,12 @@ public sealed class GameTopMenuBarUIController : UIController
         _guidebook.LoadButton();
         _admin.LoadButton();
         _character.LoadButton();
+        _intentions.LoadButton();
         _crafting.LoadButton();
         _ahelp.LoadButton();
         _action.LoadButton();
         _sandbox.LoadButton();
         _emotes.LoadButton();
-        _language.LoadButton(); // Goob
+        //_language.LoadButton(); // Goob
     }
 }
