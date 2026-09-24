@@ -1,12 +1,8 @@
 using System.Linq;
 using Content.Server.EUI;
 using Content.Server.GameTicking;
-using Content.Server._CorvaxGoob.Intentions.Runtime;
-using Content.Server._CorvaxGoob.Intentions.Validation;
 using Content.Server.Mind;
 using Content.Shared._CorvaxGoob.Intentions.UI;
-using Robust.Server.Player;
-using Robust.Shared.GameObjects;
 using Robust.Shared.Prototypes;
 using Robust.Shared.Player;
 
@@ -20,10 +16,7 @@ public sealed class IntentionsUiSystem : EntitySystem
     [Dependency] private readonly EuiManager _eui = default!;
     [Dependency] private readonly GameTicker _gameTicker = default!;
     [Dependency] private readonly IPrototypeManager _prototypes = default!;
-    [Dependency] private readonly IntentionsRuntimeSystem _runtime = default!;
     [Dependency] private readonly MindSystem _mind = default!;
-
-    private readonly IntentionsQueryService _query = new();
     private readonly Dictionary<EntityUid, List<IntentionsEui>> _openByMind = new();
 
     /// <summary>
@@ -51,7 +44,7 @@ public sealed class IntentionsUiSystem : EntitySystem
         OpenUi(session, targetMindId, targetName, IntentionsEuiMode.Admin);
     }
 
-    /// <summary>
+/*    /// <summary>
     /// Builds the current read-model state for one Intentions window.
     /// </summary>
     public IntentionsEuiState BuildState(EntityUid targetMindId, string targetName, IntentionsEuiMode mode)
@@ -64,7 +57,7 @@ public sealed class IntentionsUiSystem : EntitySystem
             _gameTicker.RoundDuration(),
             mode,
             targetName);
-    }
+    }*/
 
     /// <summary>
     /// Refreshes every open Intentions window registered for one mind.

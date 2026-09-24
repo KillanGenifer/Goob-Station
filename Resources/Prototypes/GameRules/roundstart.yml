@@ -335,6 +335,7 @@
   parent: BaseGameRule
   components:
   - type: SandboxRule
+  - type: IntentionsWaveRule
 
 - type: entity
   id: Secret

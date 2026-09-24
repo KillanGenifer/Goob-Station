@@ -348,7 +348,7 @@ public sealed partial class AntagSelectionSystem
         }
     }
 
-    /// <summary>
+    /// <summary>M
     /// This technically is a gamerule-ent-less way to make an entity an antag.
     /// You should almost never be using this.
     /// </summary>

@@ -39,24 +39,6 @@ public sealed partial class ScenarioCategoryPrototype : IPrototype
     /// Accent color used by UI cards and category-specific presentation.
     /// </summary>
     public string? Color;
-
-    [DataField]
-    /// <summary>
-    /// Higher values make the category eligible earlier during deterministic wave ordering.
-    /// </summary>
-    public int Priority;
-
-    [DataField]
-    /// <summary>
-    /// Quota rules keyed by game mode id, including a required default entry.
-    /// </summary>
-    public Dictionary<string, QuotaRule> QuotaByGameMode = new();
-
-    [DataField]
-    /// <summary>
-    /// Per-mode cap for how many primary scenarios one mind may own in this category.
-    /// </summary>
-    public Dictionary<string, int> MaxPrimaryPerMindByGameMode = new();
 }
 
 /// <summary>

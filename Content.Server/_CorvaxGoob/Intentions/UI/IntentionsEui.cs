@@ -62,7 +62,8 @@ public sealed class IntentionsEui : BaseEui
     /// </summary>
     public override EuiStateBase GetNewState()
     {
-        return _uiSystem.BuildState(_targetMindId, _targetName, _mode);
+        return new IntentionsEuiState(IntentionsEuiMode.Player, "", TimeSpan.MinValue, [], [], []);
+        //return _uiSystem.BuildState(_targetMindId, _targetName, _mode);
     }
 
     /// <summary>

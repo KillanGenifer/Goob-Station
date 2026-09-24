@@ -1,12 +1,13 @@
 using Robust.Shared.Prototypes;
+using Robust.Shared.Serialization;
 
 namespace Content.Shared._CorvaxGoob.Intentions.Prototypes;
 
 /// <summary>
 /// Content prototype that describes a scenario distributed as a bundle of intention slots.
 /// </summary>
-[Prototype("scenarioTemplate")]
-public sealed partial class ScenarioTemplatePrototype : IPrototype
+[Prototype, DataDefinition]
+public sealed partial class IntentionPrototype : IPrototype
 {
     [ViewVariables]
     [IdDataField]
@@ -21,17 +22,16 @@ public sealed partial class ScenarioTemplatePrototype : IPrototype
     /// </summary>
     public string Name = string.Empty;
 
-    [DataField]
     /// <summary>
-    /// Category that controls quotas, UI fallbacks, and primary ownership limits.
+    /// Optional Fluent localization key for category description text.
     /// </summary>
-    public ProtoId<ScenarioCategoryPrototype> Category;
+    public string? Description;
 
     [DataField]
     /// <summary>
-    /// Whether the scenario is eligible for runtime distribution after validation succeeds.
-    /// </summary>
-    public bool Enabled = true;
+    /// Category that controls quotas, UI fallbacks, and primary ownership limits.
+    /// </summary>  
+    public ProtoId<ScenarioCategoryPrototype> Category;
 
     [DataField]
     /// <summary>
@@ -40,77 +40,46 @@ public sealed partial class ScenarioTemplatePrototype : IPrototype
     public int Weight = 1;
 
     [DataField]
+    public bool RequireAll = false;
+
     /// <summary>
-    /// Round-scoped predicates evaluated once before the scenario enters a wave pool.
+    /// Ordered slot declarations that are validated into a deterministic build order.
     /// </summary>
-    public List<PredicateDefinition> GlobalPredicates = new();
+    public List<PredicateDefinition> Entries = new();
 
     [DataField]
     /// <summary>
     /// Ordered slot declarations that are validated into a deterministic build order.
     /// </summary>
-    public List<ScenarioEntry> Entries = new();
+    public List<Predicators>? Actors;
 }
 
-/// <summary>
-/// Declares how one intention slot should be built inside a scenario.
-/// </summary>
 [DataDefinition]
-public sealed partial class ScenarioEntry
+public sealed partial class Predicators
 {
-    [DataField]
+    [DataField(required: true)]
     /// <summary>
-    /// Unique slot identifier referenced by binds, comparisons, and runtime assignments.
+    /// Human-readable content name used by tooling and debug output.
     /// </summary>
-    public string SlotId = string.Empty;
+    public string Key = string.Empty;
 
     [DataField]
     /// <summary>
-    /// Slot kind, expected to align with the referenced intention template kind.
+    /// Human-readable content name used by tooling and debug output.
     /// </summary>
-    public string Kind = IntentionsPrototypeConstants.Secondary;
+    public string Name = string.Empty;
 
     [DataField]
     /// <summary>
-    /// Intention template instantiated when this slot is successfully assigned.
+    /// Optional Fluent localization key for category description text.
     /// </summary>
-    public ProtoId<IntentionTemplatePrototype> IntentionId;
+    public string? Description;
 
     [DataField]
-    /// <summary>
-    /// Whether the scenario fails when this slot cannot be assigned.
-    /// </summary>
-    public bool Required = true;
+    public bool RequireAll = false;
 
     [DataField]
-    /// <summary>
-    /// Candidate-scoped predicates evaluated while searching for a matching participant.
-    /// </summary>
-    public List<PredicateDefinition> CandidatePredicates = new();
-
-    [DataField]
-    /// <summary>
-    /// Optional slot id whose selected candidate should be reused directly.
-    /// </summary>
-    public string? BindToSlot;
-
-    [DataField]
-    /// <summary>
-    /// Slot ids whose selected actors may be re-used for this entry.
-    /// </summary>
-    public List<string> AllowSameActorAs = new();
-
-    [DataField]
-    /// <summary>
-    /// Named values captured at commit time for localized text rendering.
-    /// </summary>
-    public Dictionary<string, TextParameterBindingDefinition> TextParameterBindings = new();
-
-    [DataField]
-    /// <summary>
-    /// Optional runtime visibility override applied on top of the intention template default.
-    /// </summary>
-    public VisibilityOverrideDefinition? VisibilityOverride;
+    public List<PredicateDefinition>? Predicates;
 }
 
 /// <summary>
@@ -119,151 +88,69 @@ public sealed partial class ScenarioEntry
 [DataDefinition]
 public sealed partial class PredicateDefinition
 {
-    [DataField]
+    [DataField(required: true)]
     /// <summary>
     /// Predicate scope, such as round or candidate.
     /// </summary>
-    public string Scope = string.Empty;
+    public PredicateDefinitionScope Scope;
 
-    [DataField]
+    [DataField(required: true)]
     /// <summary>
     /// Logical field name resolved by the predicate schema for the chosen scope.
     /// </summary>
-    public string Field = string.Empty;
+    public PredicateDefinitionField Field;
 
-    [DataField("operator")]
+    [DataField(required: true)]
     /// <summary>
     /// Comparison operator applied to the resolved field value.
     /// </summary>
-    public string Operator = string.Empty;
+    public PredicateDefinitionOperator Operator;
 
-    [DataField]
+    [DataField(required: true)]
     /// <summary>
     /// Single expected value used by unary and comparison operators.
     /// </summary>
-    public string? Value;
-
-    [DataField]
-    /// <summary>
-    /// Expected value set used by in and notIn operators.
-    /// </summary>
-    public List<string>? Values;
-
-    [DataField]
-    /// <summary>
-    /// Inclusive lower bound for between comparisons.
-    /// </summary>
-    public string? ValueFrom;
-
-    [DataField]
-    /// <summary>
-    /// Inclusive upper bound for between comparisons.
-    /// </summary>
-    public string? ValueTo;
-
-    [DataField]
-    /// <summary>
-    /// Map key used when addressing summary dictionaries such as antag counts.
-    /// </summary>
-    public string? Key;
-
-    [DataField]
-    /// <summary>
-    /// Slot comparison metadata used by sameAs and notSameAs operators.
-    /// </summary>
-    public CompareToDefinition? CompareTo;
+    public string Key = String.Empty;
 }
 
-/// <summary>
-/// Describes which already-built slot should be compared against by a predicate.
-/// </summary>
-[DataDefinition]
-public sealed partial class CompareToDefinition
+[NetSerializable, Serializable]
+public struct IntentionData(string name, string? description, ProtoId<IntentionPrototype>? origIntention = null)
 {
-    [DataField]
-    /// <summary>
-    /// Comparison scope, constrained to slot references for Intentions MVP.
-    /// </summary>
-    public string Scope = string.Empty;
+    public string Name = name;
 
-    [DataField]
-    /// <summary>
-    /// Slot id whose selected candidate should provide the comparison value.
-    /// </summary>
-    public string SlotId = string.Empty;
+    public string? Description = description;
 
-    [DataField]
-    /// <summary>
-    /// Candidate field to read from the compared slot.
-    /// </summary>
-    public string Field = string.Empty;
+    public ProtoId<IntentionPrototype>? OrigIntention = origIntention;
 }
 
-/// <summary>
-/// Scenario-level visibility override applied to a built intention instance.
-/// </summary>
-[DataDefinition]
-public sealed partial class VisibilityOverrideDefinition
+public enum PredicateDefinitionOperator
 {
-    [DataField]
-    /// <summary>
-    /// Target visibility mode to force for this slot.
-    /// </summary>
-    public string Type = string.Empty;
-
-    [DataField]
-    /// <summary>
-    /// Optional reveal rule used when the override keeps the intention hidden.
-    /// </summary>
-    public RevealDefinition? Reveal;
+    Equals,
+    NotEquals,
+    GreaterThan,
+    GraterThanOrEquals,
+    LessThan,
+    LessThanOrEquals,
+    Contains,
+    NotContains,
 }
 
-/// <summary>
-/// Declares when a hidden intention should be revealed automatically.
-/// </summary>
-[DataDefinition]
-public sealed partial class RevealDefinition
+public enum PredicateDefinitionScope
 {
-    [DataField]
-    /// <summary>
-    /// Reveal mode, such as none or timer.
-    /// </summary>
-    public string Type = string.Empty;
-
-    [DataField]
-    /// <summary>
-    /// Timer delay in round minutes for timer-based reveal mode.
-    /// </summary>
-    public int? Minutes;
+    Candidate,
+    Round,
 }
 
-/// <summary>
-/// Captures a single runtime parameter used when rendering localized text once at commit time.
-/// </summary>
-[DataDefinition]
-public sealed partial class TextParameterBindingDefinition
+public enum PredicateDefinitionField
 {
-    [DataField]
-    /// <summary>
-    /// Binding source, such as self, slot, round, or literal.
-    /// </summary>
-    public string Source = string.Empty;
-
-    [DataField]
-    /// <summary>
-    /// Referenced slot id when the binding source reads from another selected slot.
-    /// </summary>
-    public string? SlotId;
-
-    [DataField]
-    /// <summary>
-    /// Field name to read from the selected source.
-    /// </summary>
-    public string? Field;
-
-    [DataField]
-    /// <summary>
-    /// Literal value used when the binding source is a fixed string.
-    /// </summary>
-    public string? Value;
+    Job,
+    Department,
+    Age,
+    Species,
+    Sex,
+    Traits,
+    HasMindshield,
+    AntagRole,
+    AntagObjective,
+    Component,
 }

@@ -1,0 +1,146 @@
+- type: intention
+  id: IntentionSteal
+  name: intention-steal-name
+  description: intention-steal-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionForgeDocument
+  name: intention-forge-document-name
+  description: intention-forge-document-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionSecretExchange
+  name: intention-secret-exchange-name
+  description: intention-secret-exchange-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionFraudAccess
+  name: intention-fraud-access-name
+  description: intention-fraud-access-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionFalseComplaint
+  name: intention-false-complaint-name
+  description: intention-false-complaint-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionIllegalService
+  name: intention-illegal-service-name
+  description: intention-illegal-service-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionClientExecutor
+  name: intention-client-executor-name
+  description: intention-client-executor-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionSpotterThief
+  name: intention-spotter-thief-name
+  description: intention-spotter-thief-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionFalseWitness
+  name: intention-false-witness-name
+  description: intention-false-witness-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionQuietBlackmail
+  name: intention-quiet-blackmail-name
+  description: intention-quiet-blackmail-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionDisinformation
+  name: intention-disinformation-name
+  description: intention-disinformation-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionCollectDirt
+  name: intention-collect-dirt-name
+  description: intention-collect-dirt-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionErodeTrust
+  name: intention-erode-trust-name
+  description: intention-erode-trust-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionForgeVoice
+  name: intention-forge-voice-name
+  description: intention-forge-voice-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionDoubleLie
+  name: intention-double-lie-name
+  description: intention-double-lie-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionShowIncompetence
+  name: intention-show-incompetence-name
+  description: intention-show-incompetence-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionBureaucraticPressure
+  name: intention-bureaucratic-pressure-name
+  description: intention-bureaucratic-pressure-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionPublicChallenge
+  name: intention-public-challenge-name
+  description: intention-public-challenge-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionProvokeArgument
+  name: intention-provoke-argument-name
+  description: intention-provoke-argument-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionDepartmentFeud
+  name: intention-department-feud-name
+  description: intention-department-feud-description
+  category: aggressive
+  weight: 1
+
+- type: intention
+  id: IntentionCatchViolation
+  name: intention-catch-violation-name
+  description: intention-catch-violation-description
+  category: aggressive
+  weight: 1

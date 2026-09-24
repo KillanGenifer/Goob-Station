@@ -1,5 +1,6 @@
 // SPDX-License-Identifier: AGPL-3.0-or-later
 
+using Content.Shared._CorvaxGoob.Intentions.Prototypes;
 using Content.Shared._CorvaxGoob.Skills;
 using Content.Shared.GameTicking;
 using Content.Shared.Mind.Components;
@@ -125,6 +126,9 @@ public sealed partial class MindComponent : Component
     /// </summary>
     [DataField]
     public LocId? Subtype;
+
+    [DataField, AutoNetworkedField]
+    public List<IntentionData> Intentions = new();
 
     [DataField]
     public HashSet<Skills> Skills = []; // CorvaxGoob-Skills

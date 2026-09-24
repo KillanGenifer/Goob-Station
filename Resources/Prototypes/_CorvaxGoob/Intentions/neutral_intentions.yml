@@ -1,0 +1,90 @@
+- type: intention
+  id: IntentionKeepOathNoSwearing
+  name: intention-keep-oath-no-swearing-name
+  description: intention-keep-oath-no-swearing-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionTryStrangeFood
+  name: intention-try-strange-food-name
+  description: intention-try-strange-food-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionSmallCollection
+  name: intention-small-collection-name
+  description: intention-small-collection-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionSaveStationTalisman
+  name: intention-save-station-talisman-name
+  description: intention-save-station-talisman-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionFirstAidBriefing
+  name: intention-first-aid-briefing-name
+  description: intention-first-aid-briefing-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionSignatureDish
+  name: intention-signature-dish-name
+  description: intention-signature-dish-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionDepartmentNeedsne
+  name: intention-department-needsne-name
+  description: intention-department-needsne-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionCheckToolsne
+  name: intention-check-toolsne-name
+  description: intention-check-toolsne-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionSafetyReminderne
+  name: intention-safety-reminderne-name
+  description: intention-safety-reminderne-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionMentorNewbiene
+  name: intention-mentor-newbiene-name
+  description: intention-mentor-newbiene-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionTrackConsumablesne
+  name: intention-track-consumablesne-name
+  description: intention-track-consumablesne-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionShiftPlanne
+  name: intention-shift-planne-name
+  description: intention-shift-planne-description
+  category: neutral
+  weight: 1
+
+- type: intention
+  id: IntentionWorkReportne
+  name: intention-work-reportne-name
+  description: intention-work-reportne-description
+  category: neutral
+  weight: 1

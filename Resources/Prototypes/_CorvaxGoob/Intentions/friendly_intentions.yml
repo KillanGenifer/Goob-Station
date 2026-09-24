@@ -1,0 +1,261 @@
+- type: intention
+  id: IntentionSecretSanta
+  name: intention-secret-santa-name
+  description: intention-secret-santa-description
+  category: friendly
+  weight: 1
+  requireAll: false # Относится к всем entries
+  # entries:
+  # - scope: Candidate
+  #   field: Job
+  #   operator: Equals
+  #   key: Reporter
+  # actors:
+  # - key: partner
+  #   name: intention-secret-santa-name
+  #   description: intention-secret-santa-description
+
+- type: intention
+  id: IntentionStationValentine
+  name: intention-station-valentine-name
+  description: intention-station-valentine-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionCostumeContest
+  name: intention-costume-contest-name
+  description: intention-costume-contest-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionMemorableToast
+  name: intention-memorable-toast-name
+  description: intention-memorable-toast-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionThematicCard
+  name: intention-thematic-card-name
+  description: intention-thematic-card-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionZoneDecoration
+  name: intention-zone-decoration-name
+  description: intention-zone-decoration-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionGuestSearch
+  name: intention-guest-search-name
+  description: intention-guest-search-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionOrganizerHelper
+  name: intention-organizer-helper-name
+  description: intention-organizer-helper-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionGiverCourier
+  name: intention-giver-courier-name
+  description: intention-giver-courier-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionJointPrank
+  name: intention-joint-prank-summary
+  description: intention-joint-prank-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionGiftCoordination
+  name: intention-gift-coordination-name
+  description: intention-gift-coordination-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionLocationDecoration
+  name: intention-location-decoration-name
+  description: intention-location-decoration-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionLocationDecorationPartner
+  name: intention-location-decoration-partner-name
+  description: intention-location-decoration-partner-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionQuiz
+  name: intention-quiz-name
+  description: intention-quiz-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionMiniMeeting
+  name: intention-mini-meeting-name
+  description: intention-mini-meeting-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionPetition
+  name: intention-petition-name
+  description: intention-petition-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionStoryEvening
+  name: intention-story-evening-name
+  description: intention-story-evening-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionNeighborTea
+  name: intention-neighbor-tea-name
+  description: intention-neighbor-tea-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionNewsExchange
+  name: intention-news-exchange-name
+  description: intention-news-exchange-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionGratitudeBoard
+  name: intention-gratitude-board-name
+  description: intention-gratitude-board-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionBarOpinion
+  name: intention-bar-opinion-name
+  description: intention-bar-opinion-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionAcquaintanceCircle
+  name: intention-acquaintance-circle-name
+  description: intention-acquaintance-circle-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionMeetStranger
+  name: intention-meet-stranger-name
+  description: intention-meet-stranger-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionDepartmentIntro
+  name: intention-department-intro-name
+  description: intention-department-intro-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionShortInterview
+  name: intention-short-interview-name
+  description: intention-short-interview-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionInvitationsTogether
+  name: intention-invitations-together-name
+  description: intention-invitations-together-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionSharedToast
+  name: intention-shared-toast-name
+  description: intention-shared-toast-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionFriendlyArgument
+  name: intention-friendly-argument-name
+  description: intention-friendly-argument-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionBarDecoration
+  name: intention-bar-decoration-name
+  description: intention-bar-decoration-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionLocalGame
+  name: intention-local-game-name
+  description: intention-local-game-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionPersonalSecret
+  name: intention-personal-secret-name
+  description: intention-personal-secret-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionMoralSupport
+  name: intention-moral-support-name
+  description: intention-moral-support-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionStoryExchange
+  name: intention-story-exchange-name
+  description: intention-story-exchange-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionFoodChallenge
+  name: intention-food-challenge-name
+  description: intention-food-challenge-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionLiftMoodTogether
+  name: intention-lift-mood-together-name
+  description: intention-lift-mood-together-description
+  category: friendly
+  weight: 1
+
+- type: intention
+  id: IntentionKindCompliments
+  name: intention-kind-compliments-name
+  description: intention-kind-compliments-description
+  category: friendly
+  weight: 1
